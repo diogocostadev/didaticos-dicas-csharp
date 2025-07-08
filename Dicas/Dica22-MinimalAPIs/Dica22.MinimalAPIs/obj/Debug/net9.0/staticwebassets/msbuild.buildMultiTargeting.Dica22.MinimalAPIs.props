@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Dica22.MinimalAPIs.props" />
+</Project>

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Dica99.MethodInlining/1.0.0": {
+        "runtime": {
+          "Dica99.MethodInlining.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Dica99.MethodInlining/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

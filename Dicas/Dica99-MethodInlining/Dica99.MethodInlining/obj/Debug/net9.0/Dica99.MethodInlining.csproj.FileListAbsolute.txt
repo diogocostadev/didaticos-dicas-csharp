@@ -1,0 +1,14 @@
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\bin\Debug\net9.0\Dica99.MethodInlining.exe
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\bin\Debug\net9.0\Dica99.MethodInlining.deps.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\bin\Debug\net9.0\Dica99.MethodInlining.runtimeconfig.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\bin\Debug\net9.0\Dica99.MethodInlining.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\bin\Debug\net9.0\Dica99.MethodInlining.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\obj\Debug\net9.0\Dica99.MethodInlining.GeneratedMSBuildEditorConfig.editorconfig
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\obj\Debug\net9.0\Dica99.MethodInlining.AssemblyInfoInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\obj\Debug\net9.0\Dica99.MethodInlining.AssemblyInfo.cs
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\obj\Debug\net9.0\Dica99.MethodInlining.csproj.CoreCompileInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\obj\Debug\net9.0\Dica99.MethodInlining.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\obj\Debug\net9.0\refint\Dica99.MethodInlining.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\obj\Debug\net9.0\Dica99.MethodInlining.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\obj\Debug\net9.0\Dica99.MethodInlining.genruntimeconfig.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica99-MethodInlining\Dica99.MethodInlining\obj\Debug\net9.0\ref\Dica99.MethodInlining.dll

@@ -1,0 +1,14 @@
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\obj\Debug\net9.0\Dica58.UsingRecordTypes.GeneratedMSBuildEditorConfig.editorconfig
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\obj\Debug\net9.0\Dica58.UsingRecordTypes.AssemblyInfoInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\obj\Debug\net9.0\Dica58.UsingRecordTypes.AssemblyInfo.cs
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\obj\Debug\net9.0\Dica58.UsingRecordTypes.csproj.CoreCompileInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\bin\Debug\net9.0\Dica58.UsingRecordTypes.exe
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\bin\Debug\net9.0\Dica58.UsingRecordTypes.deps.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\bin\Debug\net9.0\Dica58.UsingRecordTypes.runtimeconfig.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\bin\Debug\net9.0\Dica58.UsingRecordTypes.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\bin\Debug\net9.0\Dica58.UsingRecordTypes.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\obj\Debug\net9.0\Dica58.UsingRecordTypes.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\obj\Debug\net9.0\refint\Dica58.UsingRecordTypes.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\obj\Debug\net9.0\Dica58.UsingRecordTypes.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\obj\Debug\net9.0\Dica58.UsingRecordTypes.genruntimeconfig.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica58-UsingRecordTypes\Dica58.UsingRecordTypes\obj\Debug\net9.0\ref\Dica58.UsingRecordTypes.dll

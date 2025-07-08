@@ -1,0 +1,14 @@
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\bin\Debug\net9.0\Dica15.RecordStructs.exe
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\bin\Debug\net9.0\Dica15.RecordStructs.deps.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\bin\Debug\net9.0\Dica15.RecordStructs.runtimeconfig.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\bin\Debug\net9.0\Dica15.RecordStructs.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\bin\Debug\net9.0\Dica15.RecordStructs.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\obj\Debug\net9.0\Dica15.RecordStructs.GeneratedMSBuildEditorConfig.editorconfig
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\obj\Debug\net9.0\Dica15.RecordStructs.AssemblyInfoInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\obj\Debug\net9.0\Dica15.RecordStructs.AssemblyInfo.cs
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\obj\Debug\net9.0\Dica15.RecordStructs.csproj.CoreCompileInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\obj\Debug\net9.0\Dica15.RecordStructs.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\obj\Debug\net9.0\refint\Dica15.RecordStructs.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\obj\Debug\net9.0\Dica15.RecordStructs.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\obj\Debug\net9.0\Dica15.RecordStructs.genruntimeconfig.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica15-RecordStructs\Dica15.RecordStructs\obj\Debug\net9.0\ref\Dica15.RecordStructs.dll

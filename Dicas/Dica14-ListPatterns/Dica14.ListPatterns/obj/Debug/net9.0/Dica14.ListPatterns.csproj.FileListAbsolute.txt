@@ -1,0 +1,14 @@
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\obj\Debug\net9.0\Dica14.ListPatterns.GeneratedMSBuildEditorConfig.editorconfig
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\obj\Debug\net9.0\Dica14.ListPatterns.AssemblyInfoInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\obj\Debug\net9.0\Dica14.ListPatterns.AssemblyInfo.cs
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\obj\Debug\net9.0\Dica14.ListPatterns.csproj.CoreCompileInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\bin\Debug\net9.0\Dica14.ListPatterns.exe
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\bin\Debug\net9.0\Dica14.ListPatterns.deps.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\bin\Debug\net9.0\Dica14.ListPatterns.runtimeconfig.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\bin\Debug\net9.0\Dica14.ListPatterns.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\bin\Debug\net9.0\Dica14.ListPatterns.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\obj\Debug\net9.0\Dica14.ListPatterns.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\obj\Debug\net9.0\refint\Dica14.ListPatterns.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\obj\Debug\net9.0\Dica14.ListPatterns.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\obj\Debug\net9.0\Dica14.ListPatterns.genruntimeconfig.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica14-ListPatterns\Dica14.ListPatterns\obj\Debug\net9.0\ref\Dica14.ListPatterns.dll

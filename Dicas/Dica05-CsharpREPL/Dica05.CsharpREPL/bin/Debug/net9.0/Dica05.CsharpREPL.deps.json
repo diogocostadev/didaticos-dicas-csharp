@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Dica05.CsharpREPL/1.0.0": {
+        "runtime": {
+          "Dica05.CsharpREPL.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Dica05.CsharpREPL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Dica08.TiposVazios/1.0.0": {
+        "runtime": {
+          "Dica08.TiposVazios.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Dica08.TiposVazios/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

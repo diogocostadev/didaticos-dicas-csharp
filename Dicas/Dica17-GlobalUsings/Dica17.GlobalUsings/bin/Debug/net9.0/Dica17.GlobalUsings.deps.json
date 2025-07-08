@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Dica17.GlobalUsings/1.0.0": {
+        "runtime": {
+          "Dica17.GlobalUsings.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Dica17.GlobalUsings/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

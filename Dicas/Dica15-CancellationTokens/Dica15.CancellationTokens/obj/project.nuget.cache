@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "XOw2MvauJQc=",
+  "success": true,
+  "projectFilePath": "F:\\Projetos\\Serviço de Pagamento\\dicas-csharp\\Dicas\\Dica15-CancellationTokens\\Dica15.CancellationTokens\\Dica15.CancellationTokens.csproj",
+  "expectedPackageFiles": [
+    "M:\\NuGetCache\\microsoft.aspnetcore.openapi\\9.0.3\\microsoft.aspnetcore.openapi.9.0.3.nupkg.sha512",
+    "M:\\NuGetCache\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

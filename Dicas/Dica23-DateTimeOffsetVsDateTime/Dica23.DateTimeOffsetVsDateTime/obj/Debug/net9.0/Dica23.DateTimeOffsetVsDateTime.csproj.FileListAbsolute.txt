@@ -1,0 +1,14 @@
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\bin\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.exe
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\bin\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.deps.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\bin\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.runtimeconfig.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\bin\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\bin\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\obj\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.GeneratedMSBuildEditorConfig.editorconfig
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\obj\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.AssemblyInfoInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\obj\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.AssemblyInfo.cs
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\obj\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.csproj.CoreCompileInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\obj\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\obj\Debug\net9.0\refint\Dica23.DateTimeOffsetVsDateTime.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\obj\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\obj\Debug\net9.0\Dica23.DateTimeOffsetVsDateTime.genruntimeconfig.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica23-DateTimeOffsetVsDateTime\Dica23.DateTimeOffsetVsDateTime\obj\Debug\net9.0\ref\Dica23.DateTimeOffsetVsDateTime.dll

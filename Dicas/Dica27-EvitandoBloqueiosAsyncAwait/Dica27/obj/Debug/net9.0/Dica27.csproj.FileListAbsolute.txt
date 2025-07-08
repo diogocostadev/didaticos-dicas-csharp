@@ -1,0 +1,14 @@
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\bin\Debug\net9.0\Dica27.exe
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\bin\Debug\net9.0\Dica27.deps.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\bin\Debug\net9.0\Dica27.runtimeconfig.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\bin\Debug\net9.0\Dica27.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\bin\Debug\net9.0\Dica27.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\obj\Debug\net9.0\Dica27.GeneratedMSBuildEditorConfig.editorconfig
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\obj\Debug\net9.0\Dica27.AssemblyInfoInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\obj\Debug\net9.0\Dica27.AssemblyInfo.cs
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\obj\Debug\net9.0\Dica27.csproj.CoreCompileInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\obj\Debug\net9.0\Dica27.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\obj\Debug\net9.0\refint\Dica27.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\obj\Debug\net9.0\Dica27.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\obj\Debug\net9.0\Dica27.genruntimeconfig.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica27-EvitandoBloqueiosAsyncAwait\Dica27\obj\Debug\net9.0\ref\Dica27.dll
