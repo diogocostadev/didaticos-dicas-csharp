@@ -1,0 +1,15 @@
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\bin\Debug\net9.0\Dica04.exe
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\bin\Debug\net9.0\Dica04.deps.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\bin\Debug\net9.0\Dica04.runtimeconfig.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\bin\Debug\net9.0\Dica04.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\bin\Debug\net9.0\Dica04.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\Dica04.GeneratedMSBuildEditorConfig.editorconfig
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\Dica04.AssemblyInfoInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\Dica04.AssemblyInfo.cs
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\Dica04.csproj.CoreCompileInputs.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\Dica04.sourcelink.json
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\Dica04.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\refint\Dica04.dll
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\Dica04.pdb
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\Dica04.genruntimeconfig.cache
+F:\Projetos\Serviço de Pagamento\dicas-csharp\Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04\obj\Debug\net9.0\ref\Dica04.dll
