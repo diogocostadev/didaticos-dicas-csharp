@@ -53,13 +53,14 @@ DicasCSharp/
 
 | Dica | Nome | Projetos | Benchmark | Descrição |
 |------|------|----------|-----------|-----------|
-| **02** | [Relançando Exceções Corretamente](./Dicas/Dica02-RelancandoExcecoesCorretamente/) | 1 | ❌ | Use `throw;` em vez de `throw ex;` |
-| **03** | [Travamento com Async/Await](./Dicas/Dica03-TravamentoComAsyncAwait/) | 1 | ❌ | Use `SemaphoreSlim` para locking assíncrono |
-| **15** | [CancellationTokens em APIs](./Dicas/Dica15-CancellationTokens/) | 1 | ❌ | Use tokens fornecidos pelo ASP.NET Core |
-| **23** | [DateTimeOffset vs DateTime](./Dicas/Dica23-DateTimeOffsetVsDateTime/) | 1 | ❌ | Timezone safety em aplicações globais |
-| **42** | [Atribuição Condicional Nula](./Dicas/Dica42-NullConditionalAssignment/) | 1 | ❌ | Operador ??= para lazy initialization |
-| **62** | [nameof para Símbolos](./Dicas/Dica62-NameofOperator/) | 1 | ❌ | Use nameof() em vez de strings hard-coded |
-| **76** | [Exceções para Casos Excepcionais](./Dicas/Dica76-ExceptionsForExceptionalCases/) | 1 | ❌ | Result Pattern vs exceções (914x+ rápido) |
+| **02** | [Relançando Exceções Corretamente](./Dicas/Dica02-RelancandoExcecoesCorretamente/) | 1 | ✅ | Use `throw;` em vez de `throw ex;` |
+| **03** | [Travamento com Async/Await](./Dicas/Dica03-TravamentoComAsyncAwait/) | 1 | ✅ | Use `SemaphoreSlim` para locking assíncrono |
+| **15** | [CancellationTokens em APIs](./Dicas/Dica15-CancellationTokens/) | 1 | ✅ | Use tokens fornecidos pelo ASP.NET Core |
+| **23** | [DateTimeOffset vs DateTime](./Dicas/Dica23-DateTimeOffsetVsDateTime/) | 1 | ✅ | Timezone safety em aplicações globais |
+| **25** | [String Performance](./Dicas/Dica25-StringPerformance/) | 2 | ✅ | Interpolação vs StringBuilder vs Concat (180x+ diferença) |
+| **42** | [Atribuição Condicional Nula](./Dicas/Dica42-NullConditionalAssignment/) | 1 | ✅ | Operador ??= para lazy initialization |
+| **62** | [nameof para Símbolos](./Dicas/Dica62-NameofOperator/) | 1 | ✅ | Use nameof() em vez de strings hard-coded |
+| **76** | [Exceções para Casos Excepcionais](./Dicas/Dica76-ExceptionsForExceptionalCases/) | 1 | ✅ | Result Pattern vs exceções (914x+ rápido) |
 
 ### ⚡ Async/Await Avançado
 
