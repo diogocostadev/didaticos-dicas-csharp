@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Dica22.MinimalAPIs.props" />
-</Project>
