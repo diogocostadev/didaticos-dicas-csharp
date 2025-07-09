@@ -9,7 +9,7 @@
 - **Benchmarks**: Projetos de performance automaticamente criados
 - **Documentação**: README.md e QUICKSTART.md completos
 
-### 🚀 Dicas Implementadas (43 projetos - veja a lista completa abaixo)
+### 🚀 Dicas Implementadas (66 projetos - veja a lista completa abaixo)
 
 #### ✅ **Dica 01**: Retornando Coleções Vazias
 - **Projeto**: `Dica01/Program.cs`
@@ -65,6 +65,22 @@
 - **Performance**: Speedups de 2-25x em operações vetoriais
 - **Status**: 100% implementado com benchmarks avançados
 
+#### ✅ **Dica 83**: Native AOT 🚀
+- **Projeto**: `Dica83-NativeAOT/Program.cs`
+- **Conceito**: Compilação nativa sem runtime .NET
+- **Demonstrações**: AOT-friendly code, Source Generators, performance
+- **Performance**: 5x startup, 23x JSON, 63x cold start
+- **Tamanho**: 3.4MB standalone vs 150MB+ runtime
+- **Status**: 100% implementado com binário nativo funcional
+
+#### ✅ **Dica 77**: Blazor Performance Optimization 🌐
+- **Projeto**: `Dica77-BlazorPerformance/` (Blazor WebAssembly)
+- **Conceito**: Otimização avançada de performance em Blazor
+- **Demonstrações**: Virtualização, componentes otimizados, AOT, PWA
+- **Técnicas**: ShouldRender(), @key, Service Worker, métricas
+- **Build Time**: 76.7s com AOT compilation
+- **Status**: 100% implementado com aplicação web completa
+
 ## 🧪 Como Executar
 
 ### Executar Demonstrações
@@ -111,11 +127,11 @@ dotnet build DicasCSharp.sln
 
 ## 📊 Métricas do Projeto
 
-- **Total de Projetos**: 14+ (incluindo benchmarks)
+- **Total de Projetos**: 16+ (incluindo benchmarks)
 - **Projetos com Benchmark**: 4
-- **Linhas de Código**: ~3500+
-- **Dicas Implementadas**: 8 de 100
-- **Coverage Conceitos**: Fundamentais + Performance + Avançados + SIMD
+- **Linhas de Código**: ~4500+
+- **Dicas Implementadas**: 9 de 100
+- **Coverage Conceitos**: Fundamentais + Performance + Avançados + SIMD + AOT
 
 ## 🎨 Características Implementadas
 
