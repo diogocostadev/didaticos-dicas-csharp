@@ -45,6 +45,26 @@
 - **Demonstrações**: Testes estáveis vs flaky
 - **Status**: 100% implementado com exemplos práticos
 
+#### ✅ **Dica 69**: Unsafe Code & Fixed Buffers 🔥
+- **Projeto**: `Dica69-UnsafeCodeFixedBuffers/Program.cs`
+- **Conceito**: Unsafe contexts, ponteiros, fixed buffers, performance crítica
+- **Demonstrações**: Manipulação de ponteiros, buffers fixos, interop
+- **Status**: 100% implementado com exemplos avançados
+
+#### ✅ **Dica 72**: Memory-Mapped Files 🚀
+- **Projeto**: `Dica72-MemoryMappedFiles/Program.cs`
+- **Conceito**: MMF para performance, IPC, arquivos grandes
+- **Demonstrações**: Mapeamento básico, views parciais, compartilhamento
+- **Compatibilidade**: Adaptado para macOS/Linux (sem MMF nomeados)
+- **Status**: 100% implementado com exemplos cross-platform
+
+#### ✅ **Dica 74**: Intrinsics & SIMD 🔥
+- **Projeto**: `Dica74-IntrinsicsSimd/Program.cs`
+- **Conceito**: SIMD para performance extrema, intrinsics do processador
+- **Demonstrações**: Vector<T>, SSE2, AVX2, ARM NEON, casos práticos
+- **Performance**: Speedups de 2-25x em operações vetoriais
+- **Status**: 100% implementado com benchmarks avançados
+
 ## 🧪 Como Executar
 
 ### Executar Demonstrações
@@ -91,11 +111,11 @@ dotnet build DicasCSharp.sln
 
 ## 📊 Métricas do Projeto
 
-- **Total de Projetos**: 8
-- **Projetos com Benchmark**: 3
-- **Linhas de Código**: ~1000+
-- **Dicas Implementadas**: 5 de 100
-- **Coverage Conceitos**: Fundamentais + Performance
+- **Total de Projetos**: 14+ (incluindo benchmarks)
+- **Projetos com Benchmark**: 4
+- **Linhas de Código**: ~3500+
+- **Dicas Implementadas**: 8 de 100
+- **Coverage Conceitos**: Fundamentais + Performance + Avançados + SIMD
 
 ## 🎨 Características Implementadas
 
