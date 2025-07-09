@@ -1,3 +1,5 @@
+using MediatR;
+
 namespace Dica80.CleanArchitecture.Domain.Common;
 
 /// <summary>
@@ -5,7 +7,7 @@ namespace Dica80.CleanArchitecture.Domain.Common;
 /// </summary>
 public abstract class BaseEntity
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public string CreatedBy { get; set; } = string.Empty;
@@ -33,7 +35,7 @@ public abstract class BaseEntity
 /// <summary>
 /// Base class for all domain events
 /// </summary>
-public abstract class BaseDomainEvent
+public abstract class BaseDomainEvent : INotification
 {
     public DateTime OccurredOn { get; protected set; }
     public Guid EventId { get; protected set; }

@@ -2,6 +2,7 @@ using Dica80.CleanArchitecture.Domain.Common;
 using Dica80.CleanArchitecture.Domain.ValueObjects;
 using Dica80.CleanArchitecture.Domain.Events;
 using Dica80.CleanArchitecture.Domain.Enums;
+using TaskStatus = Dica80.CleanArchitecture.Domain.Enums.TaskStatus;
 
 namespace Dica80.CleanArchitecture.Domain.Entities;
 
@@ -16,8 +17,8 @@ public class TaskItem : BaseEntity, ISoftDeletable
     public Priority Priority { get; private set; } = null!;
     public DateTime? DueDate { get; private set; }
     public DateTime? CompletedAt { get; private set; }
-    public int ProjectId { get; private set; }
-    public int? AssigneeId { get; private set; }
+    public Guid ProjectId { get; private set; }
+    public Guid? AssigneeId { get; private set; }
     
     // Soft delete properties
     public bool IsDeleted { get; set; }
@@ -34,7 +35,7 @@ public class TaskItem : BaseEntity, ISoftDeletable
     // Parameterless constructor for EF
     private TaskItem() { }
 
-    private TaskItem(string title, string description, Priority priority, int projectId, int? assigneeId = null)
+    private TaskItem(string title, string description, Priority priority, Guid projectId, Guid? assigneeId = null)
     {
         Title = title;
         Description = description;
@@ -47,7 +48,7 @@ public class TaskItem : BaseEntity, ISoftDeletable
         AddDomainEvent(new TaskCreatedEvent(this));
     }
 
-    public static TaskItem Create(string title, string description, Priority priority, int projectId, int? assigneeId = null)
+    public static TaskItem Create(string title, string description, Priority priority, Guid projectId, Guid? assigneeId = null)
     {
         if (string.IsNullOrWhiteSpace(title))
             throw new ArgumentException("Task title is required", nameof(title));
@@ -58,7 +59,7 @@ public class TaskItem : BaseEntity, ISoftDeletable
         if (priority == null)
             throw new ArgumentNullException(nameof(priority));
 
-        if (projectId <= 0)
+        if (projectId == Guid.Empty)
             throw new ArgumentException("Valid project ID is required", nameof(projectId));
 
         return new TaskItem(title, description, priority, projectId, assigneeId);
@@ -98,9 +99,9 @@ public class TaskItem : BaseEntity, ISoftDeletable
         AddDomainEvent(new TaskDueDateSetEvent(this));
     }
 
-    public void Assign(int assigneeId)
+    public void Assign(Guid assigneeId)
     {
-        if (assigneeId <= 0)
+        if (assigneeId == Guid.Empty)
             throw new ArgumentException("Valid assignee ID is required", nameof(assigneeId));
 
         var previousAssigneeId = AssigneeId;
@@ -157,7 +158,7 @@ public class TaskItem : BaseEntity, ISoftDeletable
         AddDomainEvent(new TaskReopenedEvent(this));
     }
 
-    public Comment AddComment(string content, int authorId)
+    public Comment AddComment(string content, Guid authorId)
     {
         var comment = Comment.Create(content, Id, authorId);
         _comments.Add(comment);

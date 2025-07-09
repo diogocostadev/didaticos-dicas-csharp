@@ -27,8 +27,25 @@ public static class DependencyInjection
         // Add AutoMapper
         services.AddAutoMapper(typeof(ApplicationMappingProfile));
 
-        // Add FluentValidation
-        services.AddValidatorsFromAssembly(assembly);
+        // Add FluentValidation - register all validators from assembly
+        // services.AddScoped(typeof(IValidator<>), typeof(BaseValidator<>)); // Remove this problematic line
+        
+        // Register all concrete validators manually
+        var validatorTypes = assembly.GetTypes()
+            .Where(t => t.IsClass && !t.IsAbstract && t.BaseType != null && 
+                       t.BaseType.IsGenericType && 
+                       t.BaseType.GetGenericTypeDefinition() == typeof(AbstractValidator<>))
+            .ToList();
+            
+        foreach (var validatorType in validatorTypes)
+        {
+            var interfaceType = validatorType.GetInterfaces()
+                .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IValidator<>));
+            if (interfaceType != null)
+            {
+                services.AddScoped(interfaceType, validatorType);
+            }
+        }
 
         // Add MediatR Pipeline Behaviors
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));

@@ -105,8 +105,6 @@ public class CreateProjectCommandHandler : BaseCommandHandler<CreateProjectComma
                 request.Name,
                 request.Description,
                 request.OwnerId,
-                request.StartDate,
-                request.EndDate,
                 budget);
 
             // Add to repository
@@ -180,7 +178,7 @@ public class CompleteProjectCommandHandler : BaseCommandHandler<CompleteProjectC
             project.Complete();
 
             // Update in repository
-            _projectRepository.Update(project);
+            await _projectRepository.UpdateAsync(project);
 
             // Save changes
             await _unitOfWork.SaveChangesAsync(cancellationToken);

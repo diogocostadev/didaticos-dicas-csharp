@@ -14,8 +14,9 @@ namespace Dica80.CleanArchitecture.Application.Users.Commands;
 public record CreateUserCommand : BaseCommand<Result<UserDto>>
 {
     public string Email { get; init; } = string.Empty;
-    public string Name { get; init; } = string.Empty;
-    public Domain.Enums.UserRole Role { get; init; } = Domain.Enums.UserRole.Member;
+    public string FirstName { get; init; } = string.Empty;
+    public string LastName { get; init; } = string.Empty;
+    public Domain.Enums.UserRole Role { get; init; } = Domain.Enums.UserRole.User;
 }
 
 /// <summary>
@@ -26,7 +27,8 @@ public class CreateUserCommandValidator : BaseValidator<CreateUserCommand>
     public CreateUserCommandValidator()
     {
         ValidateRequiredEmail(x => x.Email);
-        ValidateRequiredString(nameof(CreateUserCommand.Name), x => x.Name);
+        ValidateRequiredString(nameof(CreateUserCommand.FirstName), x => x.FirstName);
+        ValidateRequiredString(nameof(CreateUserCommand.LastName), x => x.LastName);
         ValidateEnum(nameof(CreateUserCommand.Role), x => x.Role);
     }
 }
@@ -63,7 +65,7 @@ public class CreateUserCommandHandler : BaseCommandHandler<CreateUserCommand, Re
             var email = Email.Create(request.Email);
 
             // Create user entity
-            var user = User.Create(email, request.Name, request.Role);
+            var user = User.Create(request.FirstName, request.LastName, request.Email, "TempPassword123!");
 
             // Add to repository
             await _userRepository.AddAsync(user);
@@ -138,8 +140,11 @@ public class UpdateUserCommandHandler : BaseCommandHandler<UpdateUserCommand, Re
                 return Result<UserDto>.Failure("User not found");
             }
 
-            // Update user
-            user.UpdateInfo(request.Name, request.Role);
+            // Update user profile - needs to be split for firstName/lastName
+            var nameParts = request.Name.Split(' ', 2);
+            var firstName = nameParts[0];
+            var lastName = nameParts.Length > 1 ? nameParts[1] : "";
+            user.UpdateProfile(firstName, lastName);
             
             if (request.IsActive != user.IsActive)
             {
@@ -150,7 +155,7 @@ public class UpdateUserCommandHandler : BaseCommandHandler<UpdateUserCommand, Re
             }
 
             // Update in repository
-            _userRepository.Update(user);
+            await _userRepository.UpdateAsync(user);
 
             // Save changes
             await _unitOfWork.SaveChangesAsync(cancellationToken);
@@ -214,7 +219,7 @@ public class DeleteUserCommandHandler : BaseCommandHandler<DeleteUserCommand, Re
             }
 
             // Soft delete user
-            _userRepository.Delete(user);
+            await _userRepository.DeleteAsync(user);
 
             // Save changes
             await _unitOfWork.SaveChangesAsync(cancellationToken);

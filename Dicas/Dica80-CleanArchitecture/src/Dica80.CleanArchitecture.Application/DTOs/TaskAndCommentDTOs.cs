@@ -1,4 +1,6 @@
 using Dica80.CleanArchitecture.Domain.Enums;
+using Dica80.CleanArchitecture.Domain.ValueObjects;
+using TaskStatus = Dica80.CleanArchitecture.Domain.Enums.TaskStatus;
 
 namespace Dica80.CleanArchitecture.Application.DTOs;
 
@@ -11,7 +13,7 @@ public record TaskDto
     public string Title { get; init; } = string.Empty;
     public string? Description { get; init; }
     public TaskStatus Status { get; init; }
-    public Priority Priority { get; init; }
+    public required Priority Priority { get; init; }
     public Guid ProjectId { get; init; }
     public string ProjectName { get; init; } = string.Empty;
     public Guid? AssignedToId { get; init; }
@@ -43,7 +45,7 @@ public record UpdateTaskDto
     public string Title { get; init; } = string.Empty;
     public string? Description { get; init; }
     public TaskStatus Status { get; init; }
-    public Priority Priority { get; init; }
+    public required Priority Priority { get; init; }
     public Guid? AssignedToId { get; init; }
     public DateTime? DueDate { get; init; }
 }
@@ -81,33 +83,4 @@ public record UpdateCommentDto
     public string Content { get; init; } = string.Empty;
 }
 
-/// <summary>
-/// DTO for paginated results
-/// </summary>
-/// <typeparam name="T">Type of items</typeparam>
-public record PagedResult<T>
-{
-    public List<T> Items { get; init; } = new();
-    public int TotalCount { get; init; }
-    public int PageNumber { get; init; }
-    public int PageSize { get; init; }
-    public int TotalPages => (int)Math.Ceiling((double)TotalCount / PageSize);
-    public bool HasPreviousPage => PageNumber > 1;
-    public bool HasNextPage => PageNumber < TotalPages;
-}
 
-/// <summary>
-/// DTO for pagination parameters
-/// </summary>
-public record PaginationParams
-{
-    public int PageNumber { get; init; } = 1;
-    public int PageSize { get; init; } = 10;
-    
-    public PaginationParams()
-    {
-        if (PageNumber < 1) PageNumber = 1;
-        if (PageSize < 1) PageSize = 10;
-        if (PageSize > 100) PageSize = 100;
-    }
-}

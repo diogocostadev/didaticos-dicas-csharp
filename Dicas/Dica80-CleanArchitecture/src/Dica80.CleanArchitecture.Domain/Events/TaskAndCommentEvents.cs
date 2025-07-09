@@ -67,10 +67,10 @@ public class TaskDeletedEvent : BaseDomainEvent
 public class TaskAssignedEvent : BaseDomainEvent
 {
     public TaskItem Task { get; }
-    public int? PreviousAssigneeId { get; }
-    public int NewAssigneeId { get; }
+    public Guid? PreviousAssigneeId { get; }
+    public Guid NewAssigneeId { get; }
     
-    public TaskAssignedEvent(TaskItem task, int? previousAssigneeId, int newAssigneeId)
+    public TaskAssignedEvent(TaskItem task, Guid? previousAssigneeId, Guid newAssigneeId)
     {
         Task = task;
         PreviousAssigneeId = previousAssigneeId;
@@ -81,9 +81,9 @@ public class TaskAssignedEvent : BaseDomainEvent
 public class TaskUnassignedEvent : BaseDomainEvent
 {
     public TaskItem Task { get; }
-    public int PreviousAssigneeId { get; }
+    public Guid PreviousAssigneeId { get; }
     
-    public TaskUnassignedEvent(TaskItem task, int previousAssigneeId)
+    public TaskUnassignedEvent(TaskItem task, Guid previousAssigneeId)
     {
         Task = task;
         PreviousAssigneeId = previousAssigneeId;

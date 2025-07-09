@@ -9,8 +9,8 @@ namespace Dica80.CleanArchitecture.Domain.Entities;
 public class Comment : BaseEntity, ISoftDeletable
 {
     public string Content { get; private set; } = string.Empty;
-    public int TaskId { get; private set; }
-    public int AuthorId { get; private set; }
+    public Guid TaskId { get; private set; }
+    public Guid AuthorId { get; private set; }
     
     // Soft delete properties
     public bool IsDeleted { get; set; }
@@ -24,7 +24,7 @@ public class Comment : BaseEntity, ISoftDeletable
     // Parameterless constructor for EF
     private Comment() { }
 
-    private Comment(string content, int taskId, int authorId)
+    private Comment(string content, Guid taskId, Guid authorId)
     {
         Content = content;
         TaskId = taskId;
@@ -34,15 +34,15 @@ public class Comment : BaseEntity, ISoftDeletable
         AddDomainEvent(new CommentCreatedEvent(this));
     }
 
-    public static Comment Create(string content, int taskId, int authorId)
+    public static Comment Create(string content, Guid taskId, Guid authorId)
     {
         if (string.IsNullOrWhiteSpace(content))
             throw new ArgumentException("Comment content is required", nameof(content));
 
-        if (taskId <= 0)
+        if (taskId == Guid.Empty)
             throw new ArgumentException("Valid task ID is required", nameof(taskId));
 
-        if (authorId <= 0)
+        if (authorId == Guid.Empty)
             throw new ArgumentException("Valid author ID is required", nameof(authorId));
 
         return new Comment(content, taskId, authorId);

@@ -25,9 +25,10 @@ public class ApplicationMappingProfile : Profile
 
         CreateMap<CreateUserDto, User>()
             .ConstructUsing(src => User.Create(
-                Domain.ValueObjects.Email.Create(src.Email),
-                src.Name,
-                src.Role));
+                src.FirstName,
+                src.LastName,
+                src.Email,
+                "TempPassword123!")); // Temporary password, should be handled differently
 
         // User stats mapping
         CreateMap<object, UserStatsDto>(); // This would be mapped from repository query results
@@ -36,7 +37,7 @@ public class ApplicationMappingProfile : Profile
     private void CreateProjectMappings()
     {
         CreateMap<Project, ProjectDto>()
-            .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.Owner != null ? src.Owner.Name : string.Empty))
+            .ForMember(dest => dest.OwnerName, opt => opt.MapFrom(src => src.Owner != null ? src.Owner.FullName : string.Empty))
             .ForMember(dest => dest.Budget, opt => opt.MapFrom(src => src.Budget != null ? src.Budget.Amount : (decimal?)null))
             .ForMember(dest => dest.BudgetCurrency, opt => opt.MapFrom(src => src.Budget != null ? src.Budget.Currency : null))
             .ForMember(dest => dest.TaskCount, opt => opt.MapFrom(src => src.Tasks.Count))
@@ -47,8 +48,6 @@ public class ApplicationMappingProfile : Profile
                 src.Name,
                 src.Description,
                 src.OwnerId,
-                src.StartDate,
-                src.EndDate,
                 src.BudgetAmount.HasValue && !string.IsNullOrEmpty(src.BudgetCurrency)
                     ? Domain.ValueObjects.Money.Create(src.BudgetAmount.Value, src.BudgetCurrency)
                     : null));
@@ -58,7 +57,7 @@ public class ApplicationMappingProfile : Profile
     {
         CreateMap<TaskItem, TaskDto>()
             .ForMember(dest => dest.ProjectName, opt => opt.MapFrom(src => src.Project != null ? src.Project.Name : string.Empty))
-            .ForMember(dest => dest.AssignedToName, opt => opt.MapFrom(src => src.AssignedTo != null ? src.AssignedTo.Name : null))
+            .ForMember(dest => dest.AssignedToName, opt => opt.MapFrom(src => src.Assignee != null ? src.Assignee.FullName : null))
             .ForMember(dest => dest.CommentCount, opt => opt.MapFrom(src => src.Comments.Count));
 
         CreateMap<CreateTaskDto, TaskItem>()
@@ -67,15 +66,14 @@ public class ApplicationMappingProfile : Profile
                 src.Description,
                 src.Priority,
                 src.ProjectId,
-                src.AssignedToId,
-                src.DueDate));
+                src.AssignedToId));
     }
 
     private void CreateCommentMappings()
     {
         CreateMap<Comment, CommentDto>()
             .ForMember(dest => dest.TaskTitle, opt => opt.MapFrom(src => src.Task != null ? src.Task.Title : string.Empty))
-            .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.Author != null ? src.Author.Name : string.Empty));
+            .ForMember(dest => dest.AuthorName, opt => opt.MapFrom(src => src.Author != null ? src.Author.FullName : string.Empty));
 
         CreateMap<CreateCommentDto, Comment>()
             .ConstructUsing(src => Comment.Create(

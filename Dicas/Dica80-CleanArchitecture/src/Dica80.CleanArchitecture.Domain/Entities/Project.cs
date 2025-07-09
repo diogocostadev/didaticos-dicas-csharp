@@ -16,7 +16,7 @@ public class Project : BaseEntity, ISoftDeletable
     public DateTime? StartDate { get; private set; }
     public DateTime? EndDate { get; private set; }
     public Money? Budget { get; private set; }
-    public int OwnerId { get; private set; }
+    public Guid OwnerId { get; private set; }
     
     // Soft delete properties
     public bool IsDeleted { get; set; }
@@ -35,7 +35,7 @@ public class Project : BaseEntity, ISoftDeletable
     // Parameterless constructor for EF
     private Project() { }
 
-    private Project(string name, string description, int ownerId, Money? budget = null)
+    private Project(string name, string description, Guid ownerId, Money? budget = null)
     {
         Name = name;
         Description = description;
@@ -47,7 +47,7 @@ public class Project : BaseEntity, ISoftDeletable
         AddDomainEvent(new ProjectCreatedEvent(this));
     }
 
-    public static Project Create(string name, string description, int ownerId, Money? budget = null)
+    public static Project Create(string name, string description, Guid ownerId, Money? budget = null)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Project name is required", nameof(name));
@@ -55,7 +55,7 @@ public class Project : BaseEntity, ISoftDeletable
         if (string.IsNullOrWhiteSpace(description))
             throw new ArgumentException("Project description is required", nameof(description));
 
-        if (ownerId <= 0)
+        if (ownerId == Guid.Empty)
             throw new ArgumentException("Valid owner ID is required", nameof(ownerId));
 
         return new Project(name, description, ownerId, budget);
@@ -117,7 +117,7 @@ public class Project : BaseEntity, ISoftDeletable
         AddDomainEvent(new ProjectCancelledEvent(this));
     }
 
-    public TaskItem AddTask(string title, string description, Priority priority, int? assigneeId = null)
+    public TaskItem AddTask(string title, string description, Priority priority, Guid? assigneeId = null)
     {
         var task = TaskItem.Create(title, description, priority, Id, assigneeId);
         _tasks.Add(task);
@@ -140,7 +140,7 @@ public class Project : BaseEntity, ISoftDeletable
         AddDomainEvent(new MemberAddedToProjectEvent(this, user));
     }
 
-    public void RemoveMember(int userId)
+    public void RemoveMember(Guid userId)
     {
         var member = _members.FirstOrDefault(m => m.Id == userId);
         if (member == null)

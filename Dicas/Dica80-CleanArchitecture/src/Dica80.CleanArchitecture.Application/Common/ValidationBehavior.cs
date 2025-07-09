@@ -1,4 +1,6 @@
 using FluentValidation;
+using MediatR;
+using System.Linq.Expressions;
 
 namespace Dica80.CleanArchitecture.Application.Common;
 
@@ -8,7 +10,7 @@ namespace Dica80.CleanArchitecture.Application.Common;
 /// <typeparam name="T">Type to validate</typeparam>
 public abstract class BaseValidator<T> : AbstractValidator<T>
 {
-    protected void ValidateRequiredString(string propertyName, Func<T, string?> propertySelector)
+    protected void ValidateRequiredString(string propertyName, Expression<Func<T, string?>> propertySelector)
     {
         RuleFor(propertySelector)
             .NotEmpty()
@@ -17,7 +19,7 @@ public abstract class BaseValidator<T> : AbstractValidator<T>
             .WithMessage($"{propertyName} must not exceed 255 characters");
     }
 
-    protected void ValidateRequiredEmail(Func<T, string?> propertySelector)
+    protected void ValidateRequiredEmail(Expression<Func<T, string?>> propertySelector)
     {
         RuleFor(propertySelector)
             .NotEmpty()
@@ -26,48 +28,56 @@ public abstract class BaseValidator<T> : AbstractValidator<T>
             .WithMessage("Email must be a valid email address");
     }
 
-    protected void ValidateRequiredId(string propertyName, Func<T, Guid> propertySelector)
+    protected void ValidateRequiredId(string propertyName, Expression<Func<T, Guid>> propertySelector)
     {
         RuleFor(propertySelector)
             .NotEmpty()
             .WithMessage($"{propertyName} is required");
     }
 
-    protected void ValidateOptionalString(string propertyName, Func<T, string?> propertySelector, int maxLength = 255)
+    protected void ValidateOptionalString(string propertyName, Expression<Func<T, string?>> propertySelector, int maxLength = 255)
     {
         RuleFor(propertySelector)
             .MaximumLength(maxLength)
             .WithMessage($"{propertyName} must not exceed {maxLength} characters")
-            .When(x => !string.IsNullOrEmpty(propertySelector(x)));
+            .When(x => !string.IsNullOrEmpty(propertySelector.Compile()(x)));
     }
 
-    protected void ValidateDescription(Func<T, string?> propertySelector)
+    protected void ValidateDescription(Expression<Func<T, string?>> propertySelector)
     {
         RuleFor(propertySelector)
             .MaximumLength(2000)
             .WithMessage("Description must not exceed 2000 characters")
-            .When(x => !string.IsNullOrEmpty(propertySelector(x)));
+            .When(x => !string.IsNullOrEmpty(propertySelector.Compile()(x)));
     }
 
-    protected void ValidateEnum<TEnum>(string propertyName, Func<T, TEnum> propertySelector) where TEnum : struct, Enum
+    protected void ValidateEnum<TEnum>(string propertyName, Expression<Func<T, TEnum>> propertySelector) where TEnum : struct, Enum
     {
         RuleFor(propertySelector)
             .IsInEnum()
             .WithMessage($"{propertyName} must be a valid value");
     }
 
-    protected void ValidatePositiveDecimal(string propertyName, Func<T, decimal> propertySelector)
+    protected void ValidatePositiveDecimal(string propertyName, Expression<Func<T, decimal>> propertySelector)
     {
         RuleFor(propertySelector)
             .GreaterThan(0)
             .WithMessage($"{propertyName} must be greater than 0");
     }
 
-    protected void ValidateNonNegativeDecimal(string propertyName, Func<T, decimal> propertySelector)
+    protected void ValidateNonNegativeDecimal(string propertyName, Expression<Func<T, decimal>> propertySelector)
     {
         RuleFor(propertySelector)
             .GreaterThanOrEqualTo(0)
             .WithMessage($"{propertyName} must be greater than or equal to 0");
+    }
+
+    protected void ValidateDateRange(string propertyName, Expression<Func<T, DateTime?>> propertySelector)
+    {
+        RuleFor(propertySelector)
+            .GreaterThan(DateTime.UtcNow.AddDays(-1))
+            .WithMessage($"{propertyName} cannot be in the past")
+            .When(x => propertySelector.Compile()(x).HasValue);
     }
 }
 
@@ -88,44 +98,19 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        if (!_validators.Any())
+        if (_validators.Any())
         {
-            return await next();
-        }
+            var context = new ValidationContext<TRequest>(request);
+            var validationResults = await Task.WhenAll(
+                _validators.Select(v => v.ValidateAsync(context, cancellationToken)));
 
-        var context = new ValidationContext<TRequest>(request);
-        var validationResults = await Task.WhenAll(
-            _validators.Select(v => v.ValidateAsync(context, cancellationToken)));
+            var failures = validationResults
+                .SelectMany(r => r.Errors)
+                .Where(f => f != null)
+                .ToList();
 
-        var failures = validationResults
-            .Where(r => r.Errors.Count > 0)
-            .SelectMany(r => r.Errors)
-            .ToList();
-
-        if (failures.Count > 0)
-        {
-            var errorMessages = failures.Select(f => f.ErrorMessage).ToList();
-            
-            // If TResponse is a Result type, return validation failure
-            if (typeof(TResponse).IsGenericType && typeof(TResponse).GetGenericTypeDefinition() == typeof(Result<>))
-            {
-                var resultType = typeof(TResponse);
-                var dataType = resultType.GetGenericArguments()[0];
-                var validationFailureMethod = resultType.GetMethod("ValidationFailure", new[] { typeof(List<string>) });
-                
-                if (validationFailureMethod != null)
-                {
-                    var result = validationFailureMethod.Invoke(null, new object[] { errorMessages });
-                    return (TResponse)result!;
-                }
-            }
-            else if (typeof(TResponse) == typeof(Result))
-            {
-                var result = Result.ValidationFailure(errorMessages);
-                return (TResponse)(object)result;
-            }
-
-            throw new ValidationException(failures);
+            if (failures.Any())
+                throw new ValidationException(failures);
         }
 
         return await next();

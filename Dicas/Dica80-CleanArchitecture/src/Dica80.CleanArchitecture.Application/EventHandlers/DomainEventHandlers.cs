@@ -5,6 +5,23 @@ using Dica80.CleanArchitecture.Domain.Events;
 
 namespace Dica80.CleanArchitecture.Application.EventHandlers;
 
+public class CommentCreatedEventHandler : INotificationHandler<CommentCreatedEvent>
+{
+    private readonly ILogger<CommentCreatedEventHandler> _logger;
+
+    public CommentCreatedEventHandler(ILogger<CommentCreatedEventHandler> logger)
+    {
+        _logger = logger;
+    }
+
+    public Task Handle(CommentCreatedEvent notification, CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Comment created: {CommentId} on Task {TaskId}", 
+            notification.Comment.Id, notification.Comment.TaskId);
+        return Task.CompletedTask;
+    }
+}
+
 /// <summary>
 /// Handler for UserCreatedEvent
 /// </summary>
@@ -183,40 +200,13 @@ public class TaskAssignedEventHandler : INotificationHandler<TaskAssignedEvent>
     public async Task Handle(TaskAssignedEvent notification, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Task assigned: {TaskId} - {TaskTitle} to user {UserId}", 
-            notification.Task.Id, notification.Task.Title, notification.Task.AssignedToId);
+            notification.Task.Id, notification.Task.Title, notification.Task.AssigneeId);
 
         // Here you could:
         // - Send assignment notification
         // - Update user workload
         // - Create calendar events
         // - Track assignment history
-        
-        await Task.CompletedTask;
-    }
-}
-
-/// <summary>
-/// Handler for CommentAddedEvent
-/// </summary>
-public class CommentAddedEventHandler : INotificationHandler<CommentAddedEvent>
-{
-    private readonly ILogger<CommentAddedEventHandler> _logger;
-
-    public CommentAddedEventHandler(ILogger<CommentAddedEventHandler> logger)
-    {
-        _logger = logger;
-    }
-
-    public async Task Handle(CommentAddedEvent notification, CancellationToken cancellationToken)
-    {
-        _logger.LogInformation("Comment added: {CommentId} on task {TaskId} by {AuthorId}", 
-            notification.Comment.Id, notification.Comment.TaskId, notification.Comment.AuthorId);
-
-        // Here you could:
-        // - Send notification to task watchers
-        // - Update activity timeline
-        // - Index comment content for search
-        // - Track comment statistics
         
         await Task.CompletedTask;
     }
