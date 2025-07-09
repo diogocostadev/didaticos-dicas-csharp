@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-Console.WriteLine("=== Dica 35: Using ConfigureAwait(false) ===\n");
+Console.WriteLine("==== Dica 35: ConfigureAwait(false) - Evitando Deadlocks ====\n");
 
 // Setup do host com logging
 using var host = Host.CreateDefaultBuilder()
@@ -20,7 +20,8 @@ var webApiService = host.Services.GetRequiredService<WebApiService>();
 var processamentoService = host.Services.GetRequiredService<ProcessamentoService>();
 
 // 1. Problema: Biblioteca SEM ConfigureAwait(false)
-Console.WriteLine("1. ❌ PROBLEMA - Biblioteca sem ConfigureAwait(false):");
+Console.WriteLine("🚨 1. PROBLEMA - Biblioteca sem ConfigureAwait(false):");
+Console.WriteLine("────────────────────────────────────────────────────────");
 logger.LogInformation("Iniciando teste sem ConfigureAwait(false)");
 
 try
@@ -38,7 +39,8 @@ catch (Exception ex)
 }
 
 // 2. Solução: Biblioteca COM ConfigureAwait(false)
-Console.WriteLine("\n2. ✅ SOLUÇÃO - Biblioteca com ConfigureAwait(false):");
+Console.WriteLine("\n✅ 2. SOLUÇÃO - Biblioteca com ConfigureAwait(false):");
+Console.WriteLine("─────────────────────────────────────────────────────");
 logger.LogInformation("Iniciando teste com ConfigureAwait(false)");
 
 await SimularContextoUI(async () =>
@@ -48,14 +50,16 @@ await SimularContextoUI(async () =>
 });
 
 // 3. Web API - quando NÃO usar ConfigureAwait(false)
-Console.WriteLine("\n3. 🌐 Web API - Quando NÃO usar ConfigureAwait(false):");
+Console.WriteLine("\n🌐 3. WEB API - Quando NÃO usar ConfigureAwait(false):");
+Console.WriteLine("──────────────────────────────────────────────────────");
 logger.LogInformation("Testando Web API sem ConfigureAwait");
 
 var resultadoApi = await webApiService.ProcessarRequestSemConfigureAwait("requisição web");
 Console.WriteLine($"  API Response: {resultadoApi}");
 
 // 4. Processamento batch - usando ConfigureAwait(false)
-Console.WriteLine("\n4. 📦 Processamento Batch - Com ConfigureAwait(false):");
+Console.WriteLine("\n📦 4. PROCESSAMENTO BATCH - Com ConfigureAwait(false):");
+Console.WriteLine("─────────────────────────────────────────────────────");
 logger.LogInformation("Processando batch de itens");
 
 var itens = Enumerable.Range(1, 5).Select(i => $"item-{i}").ToArray();
@@ -67,23 +71,26 @@ foreach (var resultado in resultados)
 }
 
 // 5. Demonstração de Thread Context
-Console.WriteLine("\n5. 🧵 Demonstração de Thread Context:");
+Console.WriteLine("\n🧵 5. DEMONSTRAÇÃO DE THREAD CONTEXT:");
+Console.WriteLine("────────────────────────────────────────");
 await DemonstrarThreadContext();
 
 // 6. Boas práticas resumidas
-Console.WriteLine("\n6. 📋 Resumo das Boas Práticas:");
-Console.WriteLine("  ✅ USE ConfigureAwait(false) em bibliotecas");
-Console.WriteLine("  ✅ USE ConfigureAwait(false) em processamento batch");
-Console.WriteLine("  ✅ USE ConfigureAwait(false) quando não precisa do contexto");
-Console.WriteLine("  ❌ NÃO USE em Web APIs (ASP.NET Core não tem SynchronizationContext)");
-Console.WriteLine("  ❌ NÃO USE quando precisar acessar UI após await");
-Console.WriteLine("  ❌ NÃO USE quando precisar do HttpContext após await");
+Console.WriteLine("\n📋 6. RESUMO DAS BOAS PRÁTICAS:");
+Console.WriteLine("─────────────────────────────────");
+Console.WriteLine("✅ USE ConfigureAwait(false) em bibliotecas");
+Console.WriteLine("✅ USE ConfigureAwait(false) em processamento batch");
+Console.WriteLine("✅ USE ConfigureAwait(false) quando não precisa do contexto");
+Console.WriteLine("❌ NÃO USE em Web APIs (ASP.NET Core não tem SynchronizationContext)");
+Console.WriteLine("❌ NÃO USE quando precisar acessar UI após await");
+Console.WriteLine("❌ NÃO USE quando precisar do HttpContext após await");
 
 // 7. Teste de performance
-Console.WriteLine("\n7. ⚡ Teste de Performance:");
+Console.WriteLine("\n⚡ 7. TESTE DE PERFORMANCE:");
+Console.WriteLine("──────────────────────────────");
 await TestarPerformance();
 
-Console.WriteLine("\n=== Fim da Demonstração ===");
+Console.WriteLine("\n=== Demonstração concluída ===");
 
 static async Task SimularContextoUI(Func<Task> operacao)
 {
