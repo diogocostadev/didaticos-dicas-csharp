@@ -482,3 +482,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Shell scripts - arquivos de demonstração/automação
+*.sh

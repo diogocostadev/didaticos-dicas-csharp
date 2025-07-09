@@ -9,7 +9,7 @@
 - **Benchmarks**: Projetos de performance automaticamente criados
 - **Documentação**: README.md e QUICKSTART.md completos
 
-### 🚀 Dicas Implementadas (8 projetos, 5 benchmarks)
+### 🚀 Dicas Implementadas (43 projetos - veja a lista completa abaixo)
 
 #### ✅ **Dica 01**: Retornando Coleções Vazias
 - **Projeto**: `Dica01/Program.cs`
@@ -39,6 +39,12 @@
 - **Conceito**: Quando usar List vs Array
 - **Status**: 100% implementado e testado
 
+#### ✅ **Dica 28**: Retestando Testes Falhos (dotnet retest) 🆕
+- **Projeto**: `Dica28.DotnetRetest/` (projeto de testes)
+- **Conceito**: Ferramenta dotnet-retest para testes flaky
+- **Demonstrações**: Testes estáveis vs flaky
+- **Status**: 100% implementado com exemplos práticos
+
 ## 🧪 Como Executar
 
 ### Executar Demonstrações
@@ -57,6 +63,13 @@ dotnet run --project "Dicas\Dica04-ArmadilhasDesempenhoLINQ\Dica04"
 
 # Dica 9 - ToList vs ToArray
 dotnet run --project "Dicas\Dica09-ToListVsToArray\Dica09"
+
+# Dica 28 - dotnet retest (novo!)
+cd "Dicas\Dica28-DotnetRetest\Dica28.DotnetRetest"
+dotnet test --filter "Category=Stable"  # Testes estáveis
+dotnet test --filter "Category=Flaky"   # Testes flaky
+# Instalar dotnet-retest: dotnet tool install -g dotnet-retest
+# dotnet retest --retry-count 3 --filter "Category=Flaky"
 ```
 
 ### Executar Benchmarks
