@@ -104,7 +104,7 @@ public class RequestLoggingMiddleware
         var requestId = Guid.NewGuid().ToString();
 
         // Add request ID to response headers
-        context.Response.Headers.Add("X-Request-Id", requestId);
+        context.Response.Headers["X-Request-Id"] = requestId;
 
         _logger.LogInformation("Request started: {RequestId} {Method} {Path} at {StartTime}",
             requestId, context.Request.Method, context.Request.Path, startTime);

@@ -109,19 +109,22 @@ public static class DatabaseInitializer
     {
         // Seed initial users
         var adminUser = Domain.Entities.User.Create(
-            Domain.ValueObjects.Email.Create("admin@cleanarch.com"),
-            "System Administrator",
-            Domain.Enums.UserRole.Admin);
+            "System",
+            "Administrator",
+            "admin@cleanarch.com",
+            "hashed_password_admin");
 
         var managerUser = Domain.Entities.User.Create(
-            Domain.ValueObjects.Email.Create("manager@cleanarch.com"),
-            "Project Manager",
-            Domain.Enums.UserRole.Manager);
+            "Project",
+            "Manager",
+            "manager@cleanarch.com",
+            "hashed_password_manager");
 
         var memberUser = Domain.Entities.User.Create(
-            Domain.ValueObjects.Email.Create("member@cleanarch.com"),
-            "Team Member",
-            Domain.Enums.UserRole.Member);
+            "Team",
+            "Member",
+            "member@cleanarch.com",
+            "hashed_password_member");
 
         await context.Users.AddRangeAsync(adminUser, managerUser, memberUser);
         await context.SaveChangesAsync();
@@ -131,8 +134,6 @@ public static class DatabaseInitializer
             "Sample Clean Architecture Project",
             "A demonstration project showcasing Clean Architecture principles",
             managerUser.Id,
-            DateTime.UtcNow,
-            DateTime.UtcNow.AddMonths(3),
             Domain.ValueObjects.Money.Create(50000, "USD"));
 
         await context.Projects.AddAsync(sampleProject);
@@ -144,24 +145,21 @@ public static class DatabaseInitializer
             "Create entities, value objects, and domain events",
             Domain.ValueObjects.Priority.High,
             sampleProject.Id,
-            memberUser.Id,
-            DateTime.UtcNow.AddDays(7));
+            memberUser.Id);
 
         var task2 = Domain.Entities.TaskItem.Create(
             "Implement Application Layer",
             "Create CQRS commands, queries, and handlers",
             Domain.ValueObjects.Priority.High,
             sampleProject.Id,
-            memberUser.Id,
-            DateTime.UtcNow.AddDays(14));
+            memberUser.Id);
 
         var task3 = Domain.Entities.TaskItem.Create(
             "Implement Infrastructure Layer",
             "Create Entity Framework configurations and repositories",
             Domain.ValueObjects.Priority.Medium,
             sampleProject.Id,
-            memberUser.Id,
-            DateTime.UtcNow.AddDays(21));
+            memberUser.Id);
 
         await context.Tasks.AddRangeAsync(task1, task2, task3);
         await context.SaveChangesAsync();

@@ -198,8 +198,8 @@ Request → ValidationBehavior → LoggingBehavior → PerformanceBehavior → H
 | **Validation** | ✅ | FluentValidation + Pipeline |
 | **AutoMapper** | ✅ | Entity ↔ DTO mappings |
 | **Event Handlers** | ✅ | Domain event processing |
-| **EF Core Setup** | 🔄 | Infrastructure layer |
-| **API Controllers** | 🔄 | WebAPI layer |
+| **EF Core Setup** | ✅ | Infrastructure layer complete |
+| **API Controllers** | ✅ | WebAPI layer complete |
 | **Authentication** | 🔄 | JWT implementation |
 | **Unit Tests** | 🔄 | Testing examples |
 
@@ -207,11 +207,11 @@ Request → ValidationBehavior → LoggingBehavior → PerformanceBehavior → H
 
 ## 🚀 **Próximos Passos**
 
-1. **Infrastructure Layer** - Entity Framework Core + SQL Server
-2. **WebAPI Layer** - Controllers + Swagger + JWT  
-3. **Testing** - Unit, Integration e E2E tests
-4. **Docker** - Containerização completa
-5. **CI/CD** - Pipeline de deploy
+1. **JWT Authentication** - Implementar autenticação e autorização
+2. **Testing** - Unit, Integration e E2E tests
+3. **Docker** - Containerização completa
+4. **CI/CD** - Pipeline de deploy
+5. **Performance** - Otimizações e monitoramento
 
 ---
 

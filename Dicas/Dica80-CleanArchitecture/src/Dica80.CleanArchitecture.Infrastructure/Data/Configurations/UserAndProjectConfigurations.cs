@@ -31,13 +31,16 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         });
 
         // Properties
-        builder.Property(x => x.Name)
-            .HasMaxLength(255)
+        builder.Property(x => x.FirstName)
+            .HasMaxLength(100)
             .IsRequired();
 
-        builder.Property(x => x.Role)
-            .HasConversion<string>()
-            .HasMaxLength(50)
+        builder.Property(x => x.LastName)
+            .HasMaxLength(100)
+            .IsRequired();
+
+        builder.Property(x => x.PasswordHash)
+            .HasMaxLength(500)
             .IsRequired();
 
         builder.Property(x => x.IsActive)
@@ -58,20 +61,15 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasDefaultValue(false);
 
         // Relationships
-        builder.HasMany(x => x.OwnedProjects)
+        builder.HasMany(x => x.Projects)
             .WithOne(x => x.Owner)
             .HasForeignKey(x => x.OwnerId)
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(x => x.AssignedTasks)
-            .WithOne(x => x.AssignedTo)
-            .HasForeignKey(x => x.AssignedToId)
+            .WithOne(x => x.Assignee)
+            .HasForeignKey(x => x.AssigneeId)
             .OnDelete(DeleteBehavior.SetNull);
-
-        builder.HasMany(x => x.Comments)
-            .WithOne(x => x.Author)
-            .HasForeignKey(x => x.AuthorId)
-            .OnDelete(DeleteBehavior.Restrict);
 
         // Ignore domain events (not persisted)
         builder.Ignore(x => x.DomainEvents);
@@ -108,7 +106,7 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
             .IsRequired();
 
         builder.Property(x => x.StartDate)
-            .IsRequired();
+            .IsRequired(false);
 
         builder.Property(x => x.EndDate)
             .IsRequired(false);
@@ -118,13 +116,11 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
         {
             budget.Property(b => b.Amount)
                 .HasColumnName("BudgetAmount")
-                .HasPrecision(18, 2)
-                .IsRequired(false);
+                .HasPrecision(18, 2);
 
             budget.Property(b => b.Currency)
                 .HasColumnName("BudgetCurrency")
-                .HasMaxLength(3)
-                .IsRequired(false);
+                .HasMaxLength(3);
         });
 
         // Audit fields
@@ -140,7 +136,7 @@ public class ProjectConfiguration : IEntityTypeConfiguration<Project>
 
         // Relationships
         builder.HasOne(x => x.Owner)
-            .WithMany(x => x.OwnedProjects)
+            .WithMany(x => x.Projects)
             .HasForeignKey(x => x.OwnerId)
             .OnDelete(DeleteBehavior.Restrict);
 

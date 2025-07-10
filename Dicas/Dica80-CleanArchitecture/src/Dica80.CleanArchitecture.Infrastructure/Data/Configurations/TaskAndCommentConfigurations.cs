@@ -31,14 +31,15 @@ public class TaskItemConfiguration : IEntityTypeConfiguration<TaskItem>
             .IsRequired();
 
         builder.Property(x => x.Priority)
-            .HasConversion<string>()
-            .HasMaxLength(50)
+            .HasConversion(
+                p => p.Level,
+                p => Domain.ValueObjects.Priority.Create(p))
             .IsRequired();
 
         builder.Property(x => x.ProjectId)
             .IsRequired();
 
-        builder.Property(x => x.AssignedToId)
+        builder.Property(x => x.AssigneeId)
             .IsRequired(false);
 
         builder.Property(x => x.DueDate)
@@ -64,9 +65,9 @@ public class TaskItemConfiguration : IEntityTypeConfiguration<TaskItem>
             .HasForeignKey(x => x.ProjectId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasOne(x => x.AssignedTo)
+        builder.HasOne(x => x.Assignee)
             .WithMany(x => x.AssignedTasks)
-            .HasForeignKey(x => x.AssignedToId)
+            .HasForeignKey(x => x.AssigneeId)
             .OnDelete(DeleteBehavior.SetNull);
 
         builder.HasMany(x => x.Comments)
@@ -81,8 +82,8 @@ public class TaskItemConfiguration : IEntityTypeConfiguration<TaskItem>
         builder.HasIndex(x => x.ProjectId)
             .HasDatabaseName("IX_Tasks_ProjectId");
 
-        builder.HasIndex(x => x.AssignedToId)
-            .HasDatabaseName("IX_Tasks_AssignedToId");
+        builder.HasIndex(x => x.AssigneeId)
+            .HasDatabaseName("IX_Tasks_AssigneeId");
 
         builder.HasIndex(x => x.Status)
             .HasDatabaseName("IX_Tasks_Status");
@@ -137,11 +138,6 @@ public class CommentConfiguration : IEntityTypeConfiguration<Comment>
             .WithMany(x => x.Comments)
             .HasForeignKey(x => x.TaskId)
             .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasOne(x => x.Author)
-            .WithMany(x => x.Comments)
-            .HasForeignKey(x => x.AuthorId)
-            .OnDelete(DeleteBehavior.Restrict);
 
         // Indexes
         builder.HasIndex(x => x.TaskId)

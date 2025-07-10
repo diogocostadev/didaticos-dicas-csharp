@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Dica80.CleanArchitecture.Domain.Common;
 using Dica80.CleanArchitecture.Domain.Repositories;
 using Dica80.CleanArchitecture.Infrastructure.Data;
+using System.Linq.Expressions;
 
 namespace Dica80.CleanArchitecture.Infrastructure.Repositories;
 
@@ -75,14 +76,19 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseEntity
         IQueryable<T> query,
         int pageNumber,
         int pageSize,
-        Func<T, TKey> orderBy,
+        Expression<Func<T, TKey>> orderBy,
         bool descending = false)
     {
         var totalCount = await query.CountAsync();
 
-        var items = descending
-            ? await query.OrderByDescending(orderBy).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync()
-            : await query.OrderBy(orderBy).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+        IQueryable<T> orderedQuery = descending
+            ? query.OrderByDescending(orderBy)
+            : query.OrderBy(orderBy);
+
+        var items = await orderedQuery
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
 
         return (items, totalCount);
     }

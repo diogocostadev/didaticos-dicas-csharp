@@ -129,7 +129,8 @@ public class UsersController : BaseController
         var command = new CreateUserCommand
         {
             Email = request.Email,
-            Name = request.Name,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
             Role = request.Role
         };
 

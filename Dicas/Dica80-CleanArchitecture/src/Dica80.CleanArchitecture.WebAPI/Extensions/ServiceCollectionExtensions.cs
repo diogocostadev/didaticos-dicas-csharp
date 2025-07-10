@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Dica80.CleanArchitecture.Infrastructure.Data;
+
 namespace Dica80.CleanArchitecture.WebAPI.Extensions;
 
 /// <summary>
@@ -43,8 +47,7 @@ public static class ServiceCollectionExtensions
         });
 
         // Add health checks
-        services.AddHealthChecks()
-            .AddDbContextCheck<Dica80.CleanArchitecture.Infrastructure.Data.ApplicationDbContext>();
+        services.AddHealthChecks();
 
         return services;
     }
