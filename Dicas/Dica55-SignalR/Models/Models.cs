@@ -14,6 +14,7 @@ public class ChatMessage
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
     public string Room { get; set; } = "general";
     public MessageType Type { get; set; } = MessageType.Text;
+    public MessageType MessageType { get; set; } = MessageType.Text;
     public string? ReplyToId { get; set; }
     public List<string> Mentions { get; set; } = new();
     public Dictionary<string, object> Metadata { get; set; } = new();
@@ -90,6 +91,7 @@ public class LiveMetric
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
     public string Source { get; set; } = string.Empty;
     public MetricType Type { get; set; } = MetricType.Counter;
+    public string Category { get; set; } = string.Empty;
     public Dictionary<string, string> Tags { get; set; } = new();
 }
 
@@ -128,6 +130,8 @@ public class CollaborativeDocument
     public string OwnerId { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime LastModified { get; set; } = DateTime.UtcNow;
+    public int Version { get; set; } = 1;
     public List<string> Collaborators { get; set; } = new();
     public List<DocumentEdit> EditHistory { get; set; } = new();
     public Dictionary<string, UserCursor> ActiveCursors { get; set; } = new();
@@ -143,6 +147,7 @@ public class DocumentEdit
     public EditOperation Operation { get; set; } = EditOperation.Insert;
     public int Position { get; set; }
     public string Content { get; set; } = string.Empty;
+    public int Length { get; set; }
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 }
 
@@ -172,6 +177,7 @@ public class GameRoom
     public Dictionary<string, object> GameData { get; set; } = new();
     public DateTime? StartedAt { get; set; }
     public DateTime? EndedAt { get; set; }
+    public string? WinnerId { get; set; }
 }
 
 public class GamePlayer
@@ -331,7 +337,8 @@ public enum GameType
     TicTacToe,
     Chess,
     Checkers,
-    Custom
+    Custom,
+    Multiplayer
 }
 
 public enum GameStatus
@@ -341,7 +348,8 @@ public enum GameStatus
     InProgress,
     Paused,
     Finished,
-    Cancelled
+    Cancelled,
+    Ended
 }
 
 public enum PlayerStatus

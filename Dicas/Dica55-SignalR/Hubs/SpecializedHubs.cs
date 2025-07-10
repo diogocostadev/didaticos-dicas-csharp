@@ -187,7 +187,7 @@ public class CollaborationHub : Hub
         var connectionId = Context.ConnectionId;
 
         // Remover cursores do usuário de todos os documentos
-        await _collaborationService.RemoveUserCursorsAsync(userId, connectionId);
+        await _collaborationService.RemoveUserCursorsAsync(userId);
 
         _logger.LogInformation("📝 Usuário {UserId} desconectado do hub de colaboração", userId);
         await base.OnDisconnectedAsync(exception);
@@ -215,7 +215,7 @@ public class CollaborationHub : Hub
             await Groups.AddToGroupAsync(connectionId, SignalRGroups.Document(documentId));
 
             // Registrar colaborador
-            await _collaborationService.AddCollaboratorAsync(documentId, userId, connectionId);
+            await _collaborationService.AddCollaboratorAsync(documentId, userId);
 
             // Notificar outros colaboradores
             await Clients.GroupExcept(SignalRGroups.Document(documentId), connectionId)
@@ -257,7 +257,7 @@ public class CollaborationHub : Hub
             await Groups.RemoveFromGroupAsync(connectionId, SignalRGroups.Document(documentId));
 
             // Remover colaborador
-            await _collaborationService.RemoveCollaboratorAsync(documentId, userId, connectionId);
+            await _collaborationService.RemoveCollaboratorAsync(documentId, userId);
 
             // Notificar outros colaboradores
             await Clients.Group(SignalRGroups.Document(documentId))
@@ -287,7 +287,16 @@ public class CollaborationHub : Hub
         try
         {
             // Aplicar edição
-            var edit = await _collaborationService.ApplyEditAsync(request, userId);
+            var edit = new DocumentEdit
+            {
+                Position = request.Position,
+                Content = request.Content,
+                Operation = request.Operation,
+                UserId = userId,
+                Timestamp = DateTime.UtcNow,
+                Length = request.Content?.Length ?? 0
+            };
+            await _collaborationService.ApplyEditAsync(request.DocumentId, edit);
 
             // Notificar outros colaboradores
             await Clients.GroupExcept(SignalRGroups.Document(request.DocumentId), Context.ConnectionId)
@@ -312,11 +321,16 @@ public class CollaborationHub : Hub
         try
         {
             // Atualizar cursor
-            var cursor = await _collaborationService.UpdateCursorAsync(request, userId);
+            await _collaborationService.UpdateCursorAsync(userId, request.DocumentId, request.Position);
 
             // Notificar outros colaboradores
             await Clients.GroupExcept(SignalRGroups.Document(request.DocumentId), Context.ConnectionId)
-                         .SendAsync(SignalREvents.CursorMoved, cursor);
+                         .SendAsync(SignalREvents.CursorMoved, new
+                         {
+                             DocumentId = request.DocumentId,
+                             UserId = userId,
+                             Position = request.Position
+                         });
         }
         catch (Exception ex)
         {
@@ -378,7 +392,13 @@ public class GameHub : Hub
 
             // Adicionar jogador
             await Groups.AddToGroupAsync(connectionId, SignalRGroups.Game(gameId));
-            var player = await _gameService.AddPlayerAsync(gameId, userId, connectionId);
+            var player = new GamePlayer 
+            { 
+                Id = userId, 
+                Name = $"Player{userId}", 
+                ConnectionId = connectionId 
+            };
+            await _gameService.AddPlayerAsync(gameId, player);
 
             // Notificar outros jogadores
             await Clients.Group(SignalRGroups.Game(gameId))
