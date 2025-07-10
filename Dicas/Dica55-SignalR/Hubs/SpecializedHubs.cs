@@ -9,12 +9,12 @@ namespace Dica55_SignalR.Hubs;
 /// </summary>
 public class NotificationHub : Hub
 {
-    private readonly INotificationService _notificationService;
+    private readonly ISignalRDemoService _demoService;
     private readonly ILogger<NotificationHub> _logger;
 
-    public NotificationHub(INotificationService notificationService, ILogger<NotificationHub> logger)
+    public NotificationHub(ISignalRDemoService demoService, ILogger<NotificationHub> logger)
     {
-        _notificationService = notificationService;
+        _demoService = demoService;
         _logger = logger;
     }
 
@@ -27,12 +27,8 @@ public class NotificationHub : Hub
         await Groups.AddToGroupAsync(connectionId, SignalRGroups.Notifications);
         await Groups.AddToGroupAsync(connectionId, SignalRGroups.User(userId));
 
-        // Enviar notificações não lidas
-        var unreadNotifications = await _notificationService.GetUnreadNotificationsAsync(userId);
-        if (unreadNotifications.Any())
-        {
-            await Clients.Caller.SendAsync("UnreadNotifications", unreadNotifications);
-        }
+        // Enviar notificação de conexão
+        await _demoService.SendNotificationAsync(userId, "Você está conectado ao sistema de notificações!");
 
         _logger.LogInformation("🔔 Usuário {UserId} conectado ao hub de notificações", userId);
         await base.OnConnectedAsync();
@@ -47,7 +43,7 @@ public class NotificationHub : Hub
 
         try
         {
-            await _notificationService.MarkAsReadAsync(notificationId, userId);
+            await _demoService.SendNotificationAsync(userId, $"Notificação {notificationId} marcada como lida");
             await Clients.Caller.SendAsync("NotificationMarkedAsRead", notificationId);
         }
         catch (Exception ex)
@@ -66,7 +62,7 @@ public class NotificationHub : Hub
 
         try
         {
-            await _notificationService.MarkAllAsReadAsync(userId);
+            await _demoService.SendNotificationAsync(userId, "Todas as notificações foram marcadas como lidas");
             await Clients.Caller.SendAsync("AllNotificationsMarkedAsRead");
         }
         catch (Exception ex)
@@ -85,7 +81,13 @@ public class NotificationHub : Hub
 
         try
         {
-            var notifications = await _notificationService.GetNotificationHistoryAsync(userId, page, pageSize);
+            // Simulação de histórico de notificações
+            var notifications = new[]
+            {
+                new { Id = "1", Message = "Bem-vindo ao sistema!", IsRead = true, Timestamp = DateTime.UtcNow.AddHours(-1) },
+                new { Id = "2", Message = "Nova mensagem recebida", IsRead = false, Timestamp = DateTime.UtcNow.AddMinutes(-30) },
+                new { Id = "3", Message = "Sistema atualizado", IsRead = true, Timestamp = DateTime.UtcNow.AddMinutes(-15) }
+            };
             await Clients.Caller.SendAsync("NotificationHistory", notifications);
         }
         catch (Exception ex)

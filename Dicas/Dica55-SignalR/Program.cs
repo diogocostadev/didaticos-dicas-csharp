@@ -29,9 +29,12 @@ builder.Services.AddSignalR(options =>
 })
 .AddMessagePackProtocol();
 
-// Registrar serviços
+// Registrar serviços especializados
+builder.Services.AddScoped<IMonitoringService, MonitoringService>();
+builder.Services.AddScoped<ICollaborationService, CollaborationService>();
+builder.Services.AddScoped<IGameService, GameService>();
+builder.Services.AddScoped<ISignalRDemoService, SignalRDemoService>();
 builder.Services.AddScoped<IChatService, ChatService>();
-builder.Services.AddScoped<INotificationService, NotificationService>();
 
 // Logging
 builder.Services.AddLogging(logging =>
@@ -52,6 +55,9 @@ app.UseRouting();
 
 // Mapear Hubs do SignalR
 app.MapHub<ChatHub>("/hub/chat");
+app.MapHub<MonitoringHub>("/hub/monitoring");
+app.MapHub<CollaborationHub>("/hub/collaboration");
+app.MapHub<GameHub>("/hub/game");
 
 // ==========================================
 // ENDPOINTS BÁSICOS
@@ -62,12 +68,21 @@ app.MapGet("/", () => """
 
 🔥 HUBS DISPONÍVEIS:
 • /hub/chat              - Chat em tempo real
+• /hub/monitoring        - Monitoramento de sistema em tempo real
+• /hub/collaboration     - Colaboração em documentos
+• /hub/game              - Jogos multiplayer
 
 📊 DEMONSTRAÇÕES PRÁTICAS:
-• GET  /demo/chat-simulation     - Simular chat automatizado
+• GET  /demo/chat-simulation        - Simular chat automatizado
+• GET  /demo/monitoring-simulation  - Simular métricas em tempo real
+• GET  /demo/collaboration-test     - Teste de colaboração
+• GET  /demo/game-simulation        - Simular jogo multiplayer
 
 🌐 CLIENTES DE TESTE:
-• GET /client/chat       - Cliente de chat básico
+• GET /client/chat          - Cliente de chat básico
+• GET /client/monitoring    - Dashboard de monitoramento
+• GET /client/collaboration - Editor colaborativo
+• GET /client/game          - Cliente de jogo
 
 💡 OBJETIVO: Demonstrar comunicação bidirecional em tempo real
 """)
@@ -75,7 +90,7 @@ app.MapGet("/", () => """
 .WithSummary("Página inicial com demonstrações SignalR");
 
 // Simulação de chat
-app.MapGet("/demo/chat-simulation", async (IHubContext<ChatHub> hubContext, IChatService chatService) =>
+app.MapGet("/demo/chat-simulation", async (IHubContext<ChatHub> hubContext) =>
 {
     var messages = new[]
     {
@@ -97,6 +112,64 @@ app.MapGet("/demo/chat-simulation", async (IHubContext<ChatHub> hubContext, ICha
     }
 
     return Results.Ok(new { message = "Simulação concluída", messagesCount = messages.Length });
+});
+
+// Simulação de monitoramento
+app.MapGet("/demo/monitoring-simulation", async (IHubContext<MonitoringHub> hubContext, IMonitoringService monitoringService) =>
+{
+    var random = new Random();
+    var metrics = new[]
+    {
+        "CPU Usage", "Memory Usage", "Disk I/O", "Network Traffic"
+    };
+
+    for (int i = 0; i < 10; i++)
+    {
+        foreach (var metricName in metrics)
+        {
+            var metric = new Dica55_SignalR.Models.LiveMetric
+            {
+                Name = metricName,
+                Value = random.NextDouble() * 100,
+                Unit = metricName.Contains("Usage") ? "%" : "MB/s",
+                Timestamp = DateTime.UtcNow,
+                Category = "System"
+            };
+
+            await monitoringService.UpdateMetricAsync(metric);
+            await hubContext.Clients.All.SendAsync("MetricUpdated", metric);
+        }
+        
+        await Task.Delay(1000);
+    }
+
+    return Results.Ok(new { message = "Simulação de monitoramento concluída", cycles = 10 });
+});
+
+// Simulação de jogo
+app.MapGet("/demo/game-simulation", async (IHubContext<GameHub> hubContext, IGameService gameService) =>
+{
+    var gameId = Guid.NewGuid().ToString();
+    
+    // Criar jogo
+    var game = await gameService.CreateGameAsync(gameId, Dica55_SignalR.Models.GameType.Quiz);
+    await hubContext.Clients.All.SendAsync("GameCreated", game);
+
+    // Adicionar jogadores simulados
+    var players = new[]
+    {
+        new Dica55_SignalR.Models.GamePlayer { Id = "player1", Name = "Alice", Score = 0 },
+        new Dica55_SignalR.Models.GamePlayer { Id = "player2", Name = "Bob", Score = 0 }
+    };
+
+    foreach (var player in players)
+    {
+        await gameService.AddPlayerAsync(gameId, player);
+        await hubContext.Clients.All.SendAsync("PlayerJoined", new { gameId, player });
+        await Task.Delay(1000);
+    }
+
+    return Results.Ok(new { message = "Jogo simulado criado", gameId, playersCount = players.Length });
 });
 
 // Cliente de teste
@@ -153,6 +226,81 @@ app.MapGet("/client/chat", () => Results.Content("""
 """, "text/html"))
 .WithTags("Test Clients");
 
+// Cliente de monitoramento
+app.MapGet("/client/monitoring", () => Results.Content("""
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard de Monitoramento - SignalR</title>
+    <script src="https://unpkg.com/@microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .metric { margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .value { font-size: 24px; font-weight: bold; color: #007acc; }
+        #status { margin-bottom: 20px; padding: 10px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>📊 Dashboard de Monitoramento SignalR</h1>
+    <div id="status">Desconectado</div>
+    <button onclick="connect()">Conectar</button>
+    <button onclick="disconnect()">Desconectar</button>
+    
+    <div id="metrics"></div>
+
+    <script>
+        let connection = null;
+        const metrics = {};
+        
+        async function connect() {
+            connection = new signalR.HubConnectionBuilder()
+                .withUrl("/hub/monitoring")
+                .build();
+                
+            connection.on("MetricUpdated", (metric) => {
+                metrics[metric.name] = metric;
+                updateDisplay();
+            });
+            
+            connection.on("SystemStatusUpdated", (status) => {
+                console.log("Status do sistema:", status);
+            });
+            
+            await connection.start();
+            document.getElementById('status').innerText = 'Conectado ao hub de monitoramento';
+            document.getElementById('status').style.background = '#d4edda';
+        }
+        
+        async function disconnect() {
+            if (connection) {
+                await connection.stop();
+                document.getElementById('status').innerText = 'Desconectado';
+                document.getElementById('status').style.background = '#f8d7da';
+            }
+        }
+        
+        function updateDisplay() {
+            const container = document.getElementById('metrics');
+            container.innerHTML = '';
+            
+            Object.values(metrics).forEach(metric => {
+                const div = document.createElement('div');
+                div.className = 'metric';
+                div.innerHTML = `
+                    <div><strong>${metric.name}</strong></div>
+                    <div class="value">${metric.value.toFixed(2)} ${metric.unit}</div>
+                    <div>Categoria: ${metric.category}</div>
+                    <div>Atualizado: ${new Date(metric.timestamp).toLocaleTimeString()}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>
+""", "text/html"))
+.WithTags("Test Clients");
+
 Console.WriteLine("""
 
 🎯 DICA 55: SIGNALR - COMUNICAÇÃO EM TEMPO REAL
@@ -160,14 +308,22 @@ Console.WriteLine("""
 
 🔥 RECURSOS IMPLEMENTADOS:
 • Chat em tempo real com SignalR
+• Monitoramento de sistema em tempo real
+• Colaboração em documentos
+• Jogos multiplayer
 • WebSockets com fallback automático
-• Broadcast de mensagens
-• Clientes JavaScript integrados
 
 ⚡ COMO USAR:
 1. Acesse http://localhost:5000 para ver as opções
 2. Use /client/chat para testar chat básico
-3. Execute /demo/chat-simulation para ver automação
+3. Use /client/monitoring para dashboard em tempo real
+4. Execute as demos em /demo/* para ver automação
+
+🎮 HUBS ESPECIALIZADOS:
+• MonitoringHub    - Métricas de sistema
+• CollaborationHub - Edição colaborativa
+• GameHub          - Jogos multiplayer
+• ChatHub          - Chat básico
 
 💡 OBJETIVO: Demonstrar comunicação bidirecional em tempo real
 ═══════════════════════════════════════════════════════════════

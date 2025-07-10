@@ -97,7 +97,9 @@ namespace Dica55_SignalR.Services
                         MessageType = MessageType.Text
                     };
 
-                    await chatService.SaveMessageAsync(chatMessage);
+                    // Simular salvamento da mensagem (log apenas)
+                    _logger.LogInformation("💾 Mensagem salva: {User} - {Message}", chatMessage.User, chatMessage.Message);
+                    
                     await hubContext.Clients.Group(SignalRGroups.ChatRoom("demo"))
                                            .SendAsync(SignalREvents.ReceiveMessage, chatMessage, cancellationToken);
 
