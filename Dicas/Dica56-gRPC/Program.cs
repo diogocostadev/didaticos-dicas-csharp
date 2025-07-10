@@ -123,6 +123,11 @@ app.MapGet("/", async context =>
     • Grpc.AspNetCore 2.66.0
     • Google.Protobuf 3.28.2
     • Protocol Buffers v3
+    
+    🧪 TESTES DISPONÍVEIS:
+    • Execute o script ./demo-grpc.sh para demonstração
+    • Use grpcurl para testes via linha de comando
+    • Use BloomRPC ou Postman para interface gráfica
     """);
 });
 
