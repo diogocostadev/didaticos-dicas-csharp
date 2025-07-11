@@ -373,6 +373,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dica88-PerformanceProfiling
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dica88.PerformanceProfiling", "Dicas\Dica88-PerformanceProfiling\Dica88.PerformanceProfiling\Dica88.PerformanceProfiling.csproj", "{FFEB50E6-0F1A-4703-9AAE-3FEA5E3D5370}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dica89-MemoryOptimization", "Dica89-MemoryOptimization", "{15EDC491-6AA4-4F02-B6F0-5F8BFA820438}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dica89.MemoryOptimization", "Dicas\Dica89-MemoryOptimization\Dica89.MemoryOptimization\Dica89.MemoryOptimization.csproj", "{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -1763,6 +1767,18 @@ Global
 		{FFEB50E6-0F1A-4703-9AAE-3FEA5E3D5370}.Release|x64.Build.0 = Release|Any CPU
 		{FFEB50E6-0F1A-4703-9AAE-3FEA5E3D5370}.Release|x86.ActiveCfg = Release|Any CPU
 		{FFEB50E6-0F1A-4703-9AAE-3FEA5E3D5370}.Release|x86.Build.0 = Release|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Debug|x64.Build.0 = Debug|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Debug|x86.Build.0 = Debug|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Release|x64.ActiveCfg = Release|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Release|x64.Build.0 = Release|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Release|x86.ActiveCfg = Release|Any CPU
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1950,5 +1966,7 @@ Global
 		{A23B78E8-875A-4C78-A9A6-F2E42989C82E} = {9B757C3E-C93F-48A0-A0FE-6ABA0A45EF11}
 		{B1498F13-B14D-483E-89C0-B9899111D856} = {AAFBA1B1-F751-270A-29D2-8275C996F74A}
 		{FFEB50E6-0F1A-4703-9AAE-3FEA5E3D5370} = {B1498F13-B14D-483E-89C0-B9899111D856}
+		{15EDC491-6AA4-4F02-B6F0-5F8BFA820438} = {AAFBA1B1-F751-270A-29D2-8275C996F74A}
+		{1B93CDEF-9392-4A7C-A63D-75D49D1EF1E9} = {15EDC491-6AA4-4F02-B6F0-5F8BFA820438}
 	EndGlobalSection
 EndGlobal
