@@ -7,13 +7,13 @@ var solutionDemo = new SolutionDemo();
 
 // Demonstração dos problemas de deadlock
 Console.WriteLine("1. Problemas comuns que causam deadlock:");
-await deadlockDemo.DemonstrateProblems();
+await deadlockDemo.DemonstrarProblemas();
 
 Console.WriteLine("\n" + new string('=', 50) + "\n");
 
 // Demonstração das soluções
 Console.WriteLine("2. Soluções para evitar deadlock:");
-await solutionDemo.DemonstrateSolutions();
+await solutionDemo.DemonstrarSolucoes();
 
 Console.WriteLine("\n" + new string('=', 50));
 Console.WriteLine("Resumo das práticas recomendadas:");
@@ -27,7 +27,7 @@ Console.WriteLine("❌ NUNCA misture código síncrono e assíncrono sem cuidado
 
 public class DeadlockDemo
 {
-    public async Task DemonstrateProblems()
+    public async Task DemonstrarProblemas()
     {
         Console.WriteLine("⚠️  ATENÇÃO: Os exemplos abaixo podem causar deadlock em ambientes síncronos!");
         Console.WriteLine("Em aplicações reais, evite esses padrões:\n");
@@ -35,24 +35,28 @@ public class DeadlockDemo
         // Exemplo problemático 1: .Result
         Console.WriteLine("❌ Problema 1: Usando .Result em contexto síncrono");
         Console.WriteLine("// NUNCA faça isso:");
-        Console.WriteLine("var result = DoAsyncWork().Result; // Pode causar deadlock!");
-        
+        Console.WriteLine("var resultado = FazerTrabalhoAsync().Result; // Pode causar deadlock!");
+
         // Exemplo problemático 2: .Wait()
         Console.WriteLine("\n❌ Problema 2: Usando .Wait() em contexto síncrono");
         Console.WriteLine("// NUNCA faça isso:");
-        Console.WriteLine("DoAsyncWork().Wait(); // Pode causar deadlock!");
-        
+        Console.WriteLine("FazerTrabalhoAsync().Wait(); // Pode causar deadlock!");
+
         // Exemplo problemático 3: GetAwaiter().GetResult()
         Console.WriteLine("\n❌ Problema 3: Usando GetAwaiter().GetResult()");
         Console.WriteLine("// NUNCA faça isso:");
-        Console.WriteLine("DoAsyncWork().GetAwaiter().GetResult(); // Pode causar deadlock!");
+        Console.WriteLine("FazerTrabalhoAsync().GetAwaiter().GetResult(); // Pode causar deadlock!");
+
+        // Demonstração CONTROLADA de deadlock (SEGURA para gravação)
+        Console.WriteLine("\n🎬 DEMO: Simulando cenário de deadlock (com timeout para não travar):");
+        await DemonstrarCenarioDeadlockControladoAsync();
 
         // Demonstração segura do padrão problemático
         Console.WriteLine("\n✅ Versão segura para demonstração:");
         try
         {
-            var result = await DoAsyncWorkSafe();
-            Console.WriteLine($"Resultado obtido de forma segura: {result}");
+            var resultado = await FazerTrabalhoSeguroAsync();
+            Console.WriteLine($"Resultado obtido de forma segura: {resultado}");
         }
         catch (Exception ex)
         {
@@ -60,156 +64,270 @@ public class DeadlockDemo
         }
     }
 
-    private async Task<string> DoAsyncWorkSafe()
+    /// <summary>
+    /// Demonstração CONTROLADA de cenário de deadlock - SEGURA para gravação!
+    /// Usa timeout para evitar travar o programa.
+    /// </summary>
+    private async Task DemonstrarCenarioDeadlockControladoAsync()
+    {
+        Console.WriteLine("   🔴 Simulando: código bloqueante esperando async...");
+
+        var cts = new CancellationTokenSource(TimeSpan.FromSeconds(3));
+        var tarefaDeadlock = Task.Run(() =>
+        {
+            try
+            {
+                Console.WriteLine("   ⏳ Thread tentando fazer .Result (MÁ PRÁTICA)...");
+                Console.WriteLine("   ⏳ [Em produção isso travaria aqui indefinidamente]");
+
+                // Simula o bloqueio - espera 2 segundos para mostrar o "travamento"
+                Thread.Sleep(2000);
+
+                Console.WriteLine("   ⏳ [Ainda esperando... CPU em baixa, fila crescendo...]");
+                Thread.Sleep(500);
+
+                // Em vez de realmente travar, mostramos que foi cancelado
+                cts.Token.ThrowIfCancellationRequested();
+            }
+            catch (OperationCanceledException)
+            {
+                Console.WriteLine("   💥 TIMEOUT! Em produção isso ficaria travado para sempre.");
+            }
+        }, cts.Token);
+
+        try
+        {
+            await tarefaDeadlock;
+        }
+        catch (OperationCanceledException)
+        {
+            Console.WriteLine("   ✅ Demo concluída - deadlock foi SIMULADO com segurança");
+        }
+
+        Console.WriteLine("   📊 Sintomas: CPU baixa, latência alta, threads bloqueadas");
+    }
+
+    private async Task<string> FazerTrabalhoSeguroAsync()
     {
         await Task.Delay(100); // Simula operação assíncrona
         return "Operação concluída";
     }
+
+    /*
+    ⚠️  CÓDIGO REAL DE DEADLOCK - COMENTADO PARA SEGURANÇA ⚠️
+
+    NÃO execute isso durante a gravação! Vai TRAVAR seu programa.
+    Use apenas para mostrar o código fonte na tela.
+
+    private void RealDeadlockExample_NEVER_RUN_THIS()
+    {
+        // ❌ PERIGO: Isso vai travar em aplicações com SynchronizationContext
+        // (WPF, WinForms, ASP.NET antigo)
+
+        var task = GetDataWithContextAsync();
+        var result = task.Result; // 💀 DEADLOCK AQUI
+    }
+
+    private async Task<string> GetDataWithContextAsync()
+    {
+        // Task precisa voltar ao contexto original
+        await Task.Delay(1000);
+        return "Nunca vai chegar aqui...";
+    }
+    */
 }
 
 public class SolutionDemo
 {
-    public async Task DemonstrateSolutions()
+    public async Task DemonstrarSolucoes()
     {
         Console.WriteLine("✅ Soluções recomendadas:\n");
 
         // Solução 1: ConfigureAwait(false)
-        await DemonstrateConfigureAwait();
-        
+        await DemonstrarConfigureAwait();
+
         // Solução 2: Async all the way
-        await DemonstrateAsyncAllTheWay();
-        
+        await DemonstrarAsyncAteORaiz();
+
         // Solução 3: Task.Run para CPU-bound
-        await DemonstrateTaskRun();
-        
+        await DemonstrarTaskRun();
+
         // Solução 4: Processamento paralelo
-        await DemonstrateParallelProcessing();
+        await DemonstrarProcessamentoParalelo();
     }
 
-    private async Task DemonstrateConfigureAwait()
+    private async Task DemonstrarConfigureAwait()
     {
         Console.WriteLine("1. Use ConfigureAwait(false) em bibliotecas:");
-        
-        var service = new LibraryService();
-        var result = await service.ProcessDataAsync("dados importantes");
-        Console.WriteLine($"   Resultado: {result}");
+
+        var servico = new ServicoBiblioteca();
+        var resultado = await servico.ProcessarDadosAsync("dados importantes");
+        Console.WriteLine($"   Resultado: {resultado}");
     }
 
-    private async Task DemonstrateAsyncAllTheWay()
+    private async Task DemonstrarAsyncAteORaiz()
     {
         Console.WriteLine("\n2. Async/await até a raiz (async all the way):");
-        
-        var data = await LoadDataAsync();
-        var processed = await ProcessDataAsync(data);
-        var saved = await SaveDataAsync(processed);
-        
-        Console.WriteLine($"   Pipeline assíncrono concluído: {saved}");
+
+        var dados = await CarregarDadosAsync();
+        var processados = await ProcessarDadosAsync(dados);
+        var salvos = await SalvarDadosAsync(processados);
+
+        Console.WriteLine($"   Pipeline assíncrono concluído: {salvos}");
     }
 
-    private async Task DemonstrateTaskRun()
+    private async Task DemonstrarTaskRun()
     {
         Console.WriteLine("\n3. Use Task.Run para operações CPU-intensive:");
-        
-        var result = await Task.Run(() => IntensiveComputation(1000000));
-        Console.WriteLine($"   Resultado do cálculo intensivo: {result}");
+
+        var resultado = await Task.Run(() => ComputacaoIntensiva(1000000));
+        Console.WriteLine($"   Resultado do cálculo intensivo: {resultado}");
     }
 
-    private async Task DemonstrateParallelProcessing()
+    private async Task DemonstrarProcessamentoParalelo()
     {
         Console.WriteLine("\n4. Processamento paralelo com Task.WhenAll:");
-        
-        var tasks = new[]
+
+        var tarefas = new[]
         {
-            ProcessItemAsync("Item 1"),
-            ProcessItemAsync("Item 2"),
-            ProcessItemAsync("Item 3"),
-            ProcessItemAsync("Item 4")
+            ProcessarItemAsync("Item 1"),
+            ProcessarItemAsync("Item 2"),
+            ProcessarItemAsync("Item 3"),
+            ProcessarItemAsync("Item 4")
         };
 
-        var results = await Task.WhenAll(tasks);
-        Console.WriteLine($"   Processados {results.Length} itens em paralelo:");
-        foreach (var result in results)
+        var resultados = await Task.WhenAll(tarefas);
+        Console.WriteLine($"   Processados {resultados.Length} itens em paralelo:");
+        foreach (var resultado in resultados)
         {
-            Console.WriteLine($"     - {result}");
+            Console.WriteLine($"     - {resultado}");
         }
+
+        // Demonstração de ThreadPool Starvation
+        await DemonstrarEsgotamentoThreadPool();
 
         // Demonstração com processamento em lotes
-        await DemonstrateBatchProcessing();
+        await DemonstrarProcessamentoEmLotes();
     }
 
-    private async Task DemonstrateBatchProcessing()
+    private async Task DemonstrarEsgotamentoThreadPool()
     {
-        Console.WriteLine("\n5. Processamento em lotes para controlar concorrência:");
-        
-        var items = Enumerable.Range(1, 10).Select(i => $"Item {i}").ToArray();
-        const int batchSize = 3;
+        Console.WriteLine("\n🚨 ThreadPool Starvation: Problema vs Solução:");
 
-        var results = new ConcurrentBag<string>();
-        
-        for (int i = 0; i < items.Length; i += batchSize)
-        {
-            var batch = items.Skip(i).Take(batchSize);
-            var batchTasks = batch.Select(async item =>
+        // ❌ PROBLEMA: Over-parallelism sem limite
+        Console.WriteLine("\n   ❌ RUIM: 100 tasks sem controle (saturando recursos)");
+        var cronometroRuim = System.Diagnostics.Stopwatch.StartNew();
+
+        var tarefasDescontroladas = Enumerable.Range(1, 100)
+            .Select(i => Task.Run(async () =>
             {
-                var result = await ProcessItemAsync(item);
-                results.Add(result);
-                return result;
+                await Task.Delay(50); // Simula I/O
+                return i;
+            }));
+
+        await Task.WhenAll(tarefasDescontroladas);
+        cronometroRuim.Stop();
+        Console.WriteLine($"   ❌ Tempo: {cronometroRuim.ElapsedMilliseconds}ms (pode causar timeouts/429 em APIs reais)");
+
+        // ✅ SOLUÇÃO: SemaphoreSlim limitando paralelismo
+        Console.WriteLine("\n   ✅ BOM: Limitando paralelismo com SemaphoreSlim (max 10 concurrent)");
+        var cronometroBom = System.Diagnostics.Stopwatch.StartNew();
+
+        var semaforo = new SemaphoreSlim(10); // Máximo 10 operações simultâneas
+        var tarefasControladas = Enumerable.Range(1, 100)
+            .Select(async i =>
+            {
+                await semaforo.WaitAsync(); // Aguarda slot disponível
+                try
+                {
+                    await Task.Delay(50); // Simula I/O
+                    return i;
+                }
+                finally
+                {
+                    semaforo.Release(); // Libera slot
+                }
             });
 
-            await Task.WhenAll(batchTasks);
-            Console.WriteLine($"   Lote processado: {string.Join(", ", batch)}");
+        var resultadosControlados = await Task.WhenAll(tarefasControladas);
+        cronometroBom.Stop();
+        Console.WriteLine($"   ✅ Tempo: {cronometroBom.ElapsedMilliseconds}ms (controlado, sem saturação)");
+        Console.WriteLine($"   ✅ Processados: {resultadosControlados.Length} items com backpressure");
+    }
+
+    private async Task DemonstrarProcessamentoEmLotes()
+    {
+        Console.WriteLine("\n5. Processamento em lotes para controlar concorrência:");
+
+        var itens = Enumerable.Range(1, 10).Select(i => $"Item {i}").ToArray();
+        const int tamanhoLote = 3;
+
+        var resultados = new ConcurrentBag<string>();
+
+        for (int i = 0; i < itens.Length; i += tamanhoLote)
+        {
+            var lote = itens.Skip(i).Take(tamanhoLote);
+            var tarefasLote = lote.Select(async item =>
+            {
+                var resultado = await ProcessarItemAsync(item);
+                resultados.Add(resultado);
+                return resultado;
+            });
+
+            await Task.WhenAll(tarefasLote);
+            Console.WriteLine($"   Lote processado: {string.Join(", ", lote)}");
         }
     }
 
-    private async Task<string> LoadDataAsync()
+    private async Task<string> CarregarDadosAsync()
     {
         await Task.Delay(50); // Simula I/O
         return "dados carregados";
     }
 
-    private async Task<string> ProcessDataAsync(string data)
+    private async Task<string> ProcessarDadosAsync(string dados)
     {
         await Task.Delay(30); // Simula processamento
-        return $"{data} -> processados";
+        return $"{dados} -> processados";
     }
 
-    private async Task<string> SaveDataAsync(string data)
+    private async Task<string> SalvarDadosAsync(string dados)
     {
         await Task.Delay(40); // Simula I/O
-        return $"{data} -> salvos";
+        return $"{dados} -> salvos";
     }
 
-    private async Task<string> ProcessItemAsync(string item)
+    private async Task<string> ProcessarItemAsync(string item)
     {
         await Task.Delay(Random.Shared.Next(50, 200)); // Simula tempo variável
         return $"{item} processado";
     }
 
-    private int IntensiveComputation(int iterations)
+    private int ComputacaoIntensiva(int iteracoes)
     {
-        int result = 0;
-        for (int i = 0; i < iterations; i++)
+        int resultado = 0;
+        for (int i = 0; i < iteracoes; i++)
         {
-            result += i * i % 1000;
+            resultado += i * i % 1000;
         }
-        return result;
+        return resultado;
     }
 }
 
-public class LibraryService
+public class ServicoBiblioteca
 {
-    public async Task<string> ProcessDataAsync(string data)
+    public async Task<string> ProcessarDadosAsync(string dados)
     {
         // ✅ SEMPRE use ConfigureAwait(false) em bibliotecas
         await Task.Delay(100).ConfigureAwait(false);
-        
+
         // Simula processamento adicional
-        await DoInternalWorkAsync().ConfigureAwait(false);
-        
-        return $"Biblioteca processou: {data}";
+        await FazerTrabalhoInternoAsync().ConfigureAwait(false);
+
+        return $"Biblioteca processou: {dados}";
     }
 
-    private async Task DoInternalWorkAsync()
+    private async Task FazerTrabalhoInternoAsync()
     {
         // ✅ ConfigureAwait(false) em toda a cadeia
         await Task.Delay(50).ConfigureAwait(false);
