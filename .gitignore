@@ -485,3 +485,58 @@ $RECYCLE.BIN/
 
 # Shell scripts - arquivos de demonstração/automação
 *.sh
+
+# ============================================
+# ARQUIVOS INTERNOS DO PROJETO (NÃO PÚBLICOS)
+# ============================================
+
+# Pasta de atividades internas
+.atividades/
+
+# Relatórios e documentos internos
+AUDITORIA_DICAS.md
+DICAS_FALTANTES.md
+MISSAO_CUMPRIDA.md
+STATUS.md
+RELATORIO_*.md
+
+# Scripts PowerShell de automação interna
+criar-*.ps1
+
+# Planejamento de vídeos (interno)
+PlanejamentoVideos/
+
+# Arquivos de trabalho temporários
+*.tmp
+*.bak
+*.old
+~$*
+
+# Notas pessoais
+NOTAS*.md
+TODO*.md
+RASCUNHO*.md
+
+# Credenciais e secrets (segurança)
+*.pfx
+*.key
+*.pem
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+secrets.json
+.env.*
+!.env.example
+
+# Arquivos de IDE adicionais
+.idea/
+*.sln.DotSettings.user
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Diretórios de publicação
+publish/
+out/
