@@ -1,32 +1,32 @@
 namespace Dica05.CsharpREPL;
 
 /// <summary>
-/// Dica 5: C# REPL (Crebel)
+/// Dica 5: C# REPL (CSharpRepl)
 /// 
 /// Para testar rapidamente um pedaço de código C# sem abrir o IDE, use a ferramenta 
-/// de linha de comando cross-platform 'crebel'.
+/// de linha de comando cross-platform 'csharprepl'.
 /// 
-/// Instale-o globalmente com 'dotnet tool install -g crebel' e use 'crebel' para 
+/// Instale-o globalmente com 'dotnet tool install -g csharprepl' e use 'csharprepl' para 
 /// entrar no modo C#. Ele oferece suporte a IntelliSense, auto-completar, sugestões 
 /// e até permite instalar pacotes NuGet e rodar APIs ASP.NET Core.
 /// </summary>
 public class REPLDemo
 {
-    public static void DemonstrarComandosCrebel()
+    public static void DemonstrarComandosCSharpRepl()
     {
-        Console.WriteLine("=== Dica 5: C# REPL (Crebel) ===\n");
+        Console.WriteLine("=== Dica 5: C# REPL (CSharpRepl) ===");
 
-        Console.WriteLine("🔧 Instalação do Crebel:");
-        Console.WriteLine("dotnet tool install -g crebel");
+        Console.WriteLine("🔧 Instalação do CSharpRepl:");
+        Console.WriteLine("dotnet tool install -g csharprepl");
         Console.WriteLine();
 
-        Console.WriteLine("🚀 Comandos básicos do Crebel:");
+        Console.WriteLine("🚀 Comandos básicos do CSharpRepl:");
         Console.WriteLine();
 
         // Demonstrar comandos que você pode usar no REPL
         var comandosREPL = new Dictionary<string, string>
         {
-            ["Iniciar REPL"] = "crebel",
+            ["Iniciar REPL"] = "csharprepl",
             ["Variáveis simples"] = "var nome = \"João\"; Console.WriteLine($\"Olá, {nome}!\");",
             ["Expressões matemáticas"] = "Math.Pow(2, 8)",
             ["Listas e LINQ"] = "var numeros = new[] {1,2,3,4,5}; numeros.Where(x => x % 2 == 0).Sum()",
@@ -45,7 +45,7 @@ public class REPLDemo
             Console.WriteLine();
         }
 
-        Console.WriteLine("💡 Características do Crebel:");
+        Console.WriteLine("💡 Características do CSharpRepl:");
         Console.WriteLine("✅ IntelliSense completo");
         Console.WriteLine("✅ Auto-completar com Tab");
         Console.WriteLine("✅ Histórico de comandos");
@@ -101,7 +101,7 @@ public class REPLDemo
 
         var comparacao = new[]
         {
-            new { Ferramenta = "Crebel", Vantagens = "IntelliSense completo, debugging, NuGet", Desvantagens = "Requer instalação separada" },
+            new { Ferramenta = "CSharpRepl", Vantagens = "IntelliSense completo, debugging, NuGet", Desvantagens = "Requer instalação separada" },
             new { Ferramenta = "dotnet-script", Vantagens = "Arquivos .csx, integração VS Code", Desvantagens = "REPL limitado" },
             new { Ferramenta = "LINQPad", Vantagens = "Interface gráfica rica, visualizações", Desvantagens = "Windows only, licença paga para recursos avançados" },
             new { Ferramenta = "Visual Studio", Vantagens = "IDE completo, debugging avançado", Desvantagens = "Pesado para testes rápidos" },
@@ -147,7 +147,7 @@ public class REPLDemo
     {
         Console.WriteLine("🖥️ Simulação de sessão REPL:");
         Console.WriteLine();
-        Console.WriteLine("C:\\> crebel");
+        Console.WriteLine("C:\\> csharprepl");
         Console.WriteLine("Microsoft (R) C# REPL");
         Console.WriteLine("Type \"#help\" for more information.");
         Console.WriteLine();
@@ -224,29 +224,29 @@ public class REPLDemo
 
             Console.WriteLine("🔍 Verificando ferramentas globais instaladas...");
             
-            if (output.Contains("crebel"))
+            if (output.Contains("csharprepl"))
             {
-                Console.WriteLine("✅ Crebel já está instalado!");
+                Console.WriteLine("✅ CSharpRepl já está instalado!");
                 
                 // Extrair versão se possível
                 var lines = output.Split('\n');
-                var crebelLine = lines.FirstOrDefault(l => l.Contains("crebel"));
-                if (crebelLine != null)
+                var csharpreplLine = lines.FirstOrDefault(l => l.Contains("csharprepl"));
+                if (csharpreplLine != null)
                 {
-                    Console.WriteLine($"   {crebelLine.Trim()}");
+                    Console.WriteLine($"   {csharpreplLine.Trim()}");
                 }
             }
             else
             {
-                Console.WriteLine("❌ Crebel não está instalado.");
+                Console.WriteLine("❌ CSharpRepl não está instalado.");
                 Console.WriteLine("💡 Para instalar, execute:");
-                Console.WriteLine("   dotnet tool install -g crebel");
+                Console.WriteLine("   dotnet tool install -g csharprepl");
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"⚠️ Erro ao verificar instalação: {ex.Message}");
-            Console.WriteLine("💡 Instale manualmente com: dotnet tool install -g crebel");
+            Console.WriteLine("💡 Instale manualmente com: dotnet tool install -g csharprepl");
         }
         
         Console.WriteLine();

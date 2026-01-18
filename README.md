@@ -138,6 +138,7 @@ Cada dica relacionada a performance possui benchmarks abrangentes que demonstram
 - **Stack trace preservation** (proper rethrowing)
 - **Exception context** (inner exceptions, data)
 - **Performance considerations** (exception costs)
+- **Evitando catch vazio** (Dica 101 - exceções engolidas)
 
 ### Modern C# Features
 - **Top-level statements** (reduced boilerplate)

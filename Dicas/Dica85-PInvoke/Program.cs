@@ -441,7 +441,7 @@ namespace Dica85.PInvoke
                     }
                 }
 
-                Console.WriteLine("\nEstatégias de Tratamento de Erros:");
+                Console.WriteLine("\nEstratégias de Tratamento de Erros:");
                 Console.WriteLine("- SetLastError = true no DllImport");
                 Console.WriteLine("- Marshal.GetLastWin32Error()");
                 Console.WriteLine("- Win32Exception para códigos de erro Windows");

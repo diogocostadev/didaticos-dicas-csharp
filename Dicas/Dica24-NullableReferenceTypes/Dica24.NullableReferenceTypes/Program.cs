@@ -272,7 +272,7 @@ public class ServicoAssincrono
 }
 
 // Métodos de extensão para trabalhar com nullable
-public static class ExtensoesSring
+public static class ExtensoesString
 {
     public static bool EstaVazio([NotNullWhen(false)] this string? valor)
     {

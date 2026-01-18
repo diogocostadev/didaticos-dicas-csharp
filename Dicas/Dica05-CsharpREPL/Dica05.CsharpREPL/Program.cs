@@ -1,11 +1,11 @@
 using Dica05.CsharpREPL;
 
-Console.WriteLine("🎯 Demonstração: C# REPL (Crebel)");
+Console.WriteLine("🎯 Demonstração: C# REPL (CSharpRepl)");
 Console.WriteLine("=" + new string('=', 50));
 Console.WriteLine();
 
-// Demonstrar comandos do Crebel
-REPLDemo.DemonstrarComandosCrebel();
+// Demonstrar comandos do CSharpRepl
+REPLDemo.DemonstrarComandosCSharpRepl();
 
 Console.WriteLine(new string('-', 60));
 Console.WriteLine();
@@ -40,8 +40,8 @@ REPLDemo.DemonstrarInstalacaoAutomatica();
 Console.WriteLine("🎉 Demonstração concluída!");
 Console.WriteLine();
 Console.WriteLine("💡 Resumo da Dica:");
-Console.WriteLine("   • Use 'crebel' para REPL C# avançado");
-Console.WriteLine("   • Instale com: dotnet tool install -g crebel");
+Console.WriteLine("   • Use 'csharprepl' para REPL C# avançado");
+Console.WriteLine("   • Instale com: dotnet tool install -g csharprepl");
 Console.WriteLine("   • Suporte completo a IntelliSense e NuGet");
 Console.WriteLine("   • Ideal para prototipagem e aprendizado");
 Console.WriteLine("   • Cross-platform e gratuito");

@@ -1,7 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
-using System.Net;
 using System.Text.Json;
 
 namespace Dica32.UsandoHttpClientCorretamente;
@@ -76,6 +75,8 @@ class Program
         try
         {
             // ❌ RUIM: Criando HttpClient a cada requisição
+            // Problema: Mesmo após Dispose(), o socket fica em TIME_WAIT por ~240 segundos
+            // Em alta carga, isso esgota os sockets disponíveis (Socket Exhaustion)
             using var client = new HttpClient();
             client.Timeout = TimeSpan.FromSeconds(5);
             

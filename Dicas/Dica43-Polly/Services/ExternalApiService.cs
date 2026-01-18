@@ -62,7 +62,7 @@ public class ExternalApiService
                 onBreak: (exception, timespan) =>
                 {
                     _logger.LogError("⚡ Circuit Breaker ABERTO por {Duration}s. Erro: {Error}",
-                        timespan.TotalSeconds, exception.Exception?.Message ?? "Response não sucessful");
+                        timespan.TotalSeconds, exception.Exception?.Message ?? "Response não foi bem-sucedida");
                 },
                 onReset: () =>
                 {
@@ -83,7 +83,9 @@ public class ExternalApiService
                 return Task.CompletedTask;
             });
 
-        // 🛡️ Política Combinada (Timeout + Circuit Breaker + Retry)
+        // 🛡️ Política Combinada (ordem: outer → inner)
+        // Retry envolve CircuitBreaker que envolve Timeout
+        // Se der timeout → circuit breaker conta como falha → retry tenta novamente
         _combinedPolicy = Policy.WrapAsync(_retryPolicy, _circuitBreakerPolicy, _timeoutPolicy);
 
         // 🔄 Política de Fallback
@@ -116,7 +118,7 @@ public class ExternalApiService
                 onFallbackAsync: (exception, context) =>
                 {
                     _logger.LogWarning("🔄 Fallback ativado devido a: {Error}",
-                        exception.Exception?.Message ?? "Response não sucessful");
+                        exception.Exception?.Message ?? "Response não foi bem-sucedida");
                     return Task.CompletedTask;
                 });
     }

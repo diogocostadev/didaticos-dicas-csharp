@@ -62,17 +62,29 @@ public class Program
     }
 }
 
-public class AsyncBestPracticesService
+public class AsyncBestPracticesService : IDisposable
 {
     private readonly ILogger<AsyncBestPracticesService> _logger;
     private readonly HttpClient _httpClient;
     private readonly Dictionary<string, string> _cache;
+    private bool _disposed;
 
     public AsyncBestPracticesService(ILogger<AsyncBestPracticesService> logger)
     {
         _logger = logger;
+        // ⚠️ Em produção, use IHttpClientFactory (veja Dica32)
+        // Aqui criamos assim apenas para simplificar o exemplo de async/await
         _httpClient = new HttpClient();
         _cache = new Dictionary<string, string>();
+    }
+
+    public void Dispose()
+    {
+        if (!_disposed)
+        {
+            _httpClient?.Dispose();
+            _disposed = true;
+        }
     }
 
     /// <summary>
@@ -485,10 +497,11 @@ public class AsyncBestPracticesService
 
     private Task<string> ObterDadosComTaskAsync(string chave)
     {
-        // ❌ Task sempre aloca, mesmo para retorno imediato
+        // ⚠️ NOTA: Task.FromResult para valores comuns (true, false, 0, 1, string.Empty, null)
+        // é cacheado pelo runtime e NÃO aloca. Mas para strings dinâmicas como aqui, ALOCA.
         if (_cache.TryGetValue(chave, out var valor))
         {
-            return Task.FromResult(valor); // Ainda aloca um Task
+            return Task.FromResult(valor); // Aloca Task para strings não-cacheadas
         }
 
         return Task.FromResult($"Novos dados para {chave}");
